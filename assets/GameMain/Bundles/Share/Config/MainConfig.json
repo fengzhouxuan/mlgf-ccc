@@ -1,0 +1,7 @@
+{
+    "debugLevel":27,
+    "camera_RotationX":-60,
+    "camera_moveDurationInMap":1,
+    "block_moveSpeed":11,
+    "block_moveDurationWhenMerge":0.3
+}
