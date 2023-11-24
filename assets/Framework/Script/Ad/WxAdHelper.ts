@@ -16,7 +16,7 @@ export class WxAdHelper extends AdHelepr {
     }
 
     initVideo() {
-        let adId = "adunit-1a3c5ed088dd246c";
+        let adId = "adunit-xxx";
         this._video = wx.createRewardedVideoAd({ adUnitId: adId });
         this._video.onLoad(() => {
             this._videoLoaded = true;

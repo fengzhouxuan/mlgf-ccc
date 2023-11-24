@@ -92,7 +92,7 @@ export class PlatformComponent extends MlComponent {
     }
 
     login(success: Function, fail: Function){
-        this._helper.login("https://api.game.hnquyou.com/api/game-common/user/login",success,fail);
+        this._helper.login("https://api.xxx/game-common/user/login",success,fail);
     }
 
     requstPostUserData(){
@@ -130,7 +130,7 @@ export class PlatformComponent extends MlComponent {
             data:jsonData
         }
         // console.log("保存"+JSON.stringify(data));
-        this._helper.httpRequest("https://api.game.hnquyou.com/api/game-common/store/save",data,'POST',(res)=>{
+        this._helper.httpRequest("https://xxx/api/game-common/store/save",data,'POST',(res)=>{
             if(res){
                 // console.log("保存成功"+JSON.stringify(res));
             }
@@ -142,7 +142,7 @@ export class PlatformComponent extends MlComponent {
     }
 
     requestUserData(success: Function, fail: Function){
-        this._helper.httpRequest("https://api.game.hnquyou.com/api/game-common/store/get",{openid:GameEntry.user.getUserId()},'POST',(res)=>{
+        this._helper.httpRequest("https://xxx/api/game-common/store/get",{openid:GameEntry.user.getUserId()},'POST',(res)=>{
             // console.log("读取服务端数据：");
             // console.log(res);
             if(res){

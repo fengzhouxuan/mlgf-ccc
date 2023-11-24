@@ -8,29 +8,10 @@ export class WxPlatformHelper extends PlatformHelper {
   onInit() {
     this._shareTemplates = [
       {
-        imageUrlId: "c59VN1qnSsabjaJsZzzt2Q==",
-        imageUrl: "https://mmocgame.qpic.cn/wechatgame/vBFfpQ251ftAbFftwmibOYWphCEdwKh4yewFILiaFS2TUKSiapQibm6HQQctOvaCFuk7/0"
+        imageUrlId: "xxx==",
+        imageUrl: "xxx"
       },
-      {
-        imageUrlId: "oSNHR8wMQQeSRzVVi1UVKQ==",
-        imageUrl: "https://mmocgame.qpic.cn/wechatgame/vBFfpQ251fvlicHKy1NbTc4aURgNbOwSlHL3k3yCibVlVmZEibG9QvtEYbKNS1IC8ib6/0"
-      },
-      {
-        imageUrlId: "/C82Bds2TMKdBaMIhMikug==",
-        imageUrl: "https://mmocgame.qpic.cn/wechatgame/vBFfpQ251ftWB8ySiaB3vJTem7uib2r1MmGxBlYP7BcCSu9q1iboia81PDNszMib9TCgx/0"
-      },
-      {
-        imageUrlId: "FkdbANp/R9GTBub0gkkuvQ==",
-        imageUrl: "https://mmocgame.qpic.cn/wechatgame/vBFfpQ251ft25Uh85162sQFzYLasWXKe3ye1aPAYYMY6lOsZr7IONLc9mNXHqcPn/0"
-      },
-      {
-        imageUrlId: "cgYL997zROytQPK78+yHzA==",
-        imageUrl: "https://mmocgame.qpic.cn/wechatgame/vBFfpQ251fstko4OLBJB25a6JKPWiaXQxYlhnJiaWRicUubEy0e3EicV3GBbouLn1J5ia/0"
-      },
-      {
-        imageUrlId: "oBkw9HvDSBiGHpKGCSFHbw==",
-        imageUrl: "https://mmocgame.qpic.cn/wechatgame/vBFfpQ251fuIYy8gArsQK6eweQxCGaXl9NfN6EibwETkOgZnQuQJsmCDFgph6IryZ/0"
-      },];
+      ];
     wx?.showShareMenu();
 
     // let index = math.randomRangeInt(0,this._shareTemplates.length);
