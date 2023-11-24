@@ -1,7 +1,7 @@
 import { _decorator, Component, Node, ParticleSystem2D } from 'cc';
-import { UIEntityTrack3d } from '../../../CustomComponent/UIEntity/UIEntityTrack3d';
-import { GameEntry } from '../../Base/GameEntry';
-import { UIParticleEntityData } from '../UIEntityData/UIParticleEntityData';
+import { UIEntityTrack3d } from '../../GameMain/CustomComponent/UIEntity/UIEntityTrack3d';
+import { GameEntry } from '../../GameMain/Script/Base/GameEntry';
+import { UIParticleEntityData } from './UIParticleEntityData';
 const { ccclass, property } = _decorator;
 
 @ccclass('UIParticleEntity')

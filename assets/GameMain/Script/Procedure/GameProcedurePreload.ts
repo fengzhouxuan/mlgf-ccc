@@ -5,7 +5,7 @@ import { GameProcedureMainGame } from "./GameProcedureMainGame";
 import { GameEntry } from "../Base/GameEntry";
 import { LoadDataTableSuccessEventArgs } from "../../../Framework/Script/DataTableComponent/LoadDataTableSuccessEventArgs";
 import { DRLevel } from "../DataTable/DRLevel";
-import { AudioManager } from "../Audio/AudioManager";
+import { AudioManager } from "../../../FrameworkUtil/Audio/AudioManager";
 import { DRLevelLoop } from "../DataTable/DRLevelLoop";
 
 //预加载资源，比如共享资源

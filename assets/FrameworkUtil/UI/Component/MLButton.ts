@@ -1,6 +1,6 @@
 import { _decorator, Button, Component, EventTouch, Node, sp, Sprite } from 'cc';
 import { AudioManager } from '../../Audio/AudioManager';
-import { GameEntry } from '../../Base/GameEntry';
+import { GameEntry } from '../../../GameMain/Script/Base/GameEntry';
 const { ccclass, property } = _decorator;
 
 @ccclass('MLButton')

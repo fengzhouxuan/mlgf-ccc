@@ -1,5 +1,5 @@
 import { _decorator, Component, Node, Vec2 } from 'cc';
-import { GameEntry } from '../Base/GameEntry';
+import { GameEntry } from '../../GameMain/Script/Base/GameEntry';
 const { ccclass, property } = _decorator;
 
 @ccclass('AStarGrid')

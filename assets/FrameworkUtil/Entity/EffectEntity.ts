@@ -1,6 +1,6 @@
 import { _decorator, Component, Node, ParticleSystem } from 'cc';
-import { GameEntityLogic } from '../../../../Framework/Script/EntityComponent/GameEntityLogic';
-import { EffectEntityData } from '../EntityData/EffectEntityData';
+import { GameEntityLogic } from '../../Framework/Script/EntityComponent/GameEntityLogic';
+import { EffectEntityData } from './EffectEntityData';
 const { ccclass, property } = _decorator;
 
 @ccclass('EffectEntity')

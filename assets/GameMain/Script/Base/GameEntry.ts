@@ -15,13 +15,13 @@ import { UIEntityComponent } from '../../CustomComponent/UIEntity/UIEntityCompon
 import { UserComponent } from '../../CustomComponent/User/UserComponent';
 import { SettingComponent } from '../../../Framework/Script/SettingComponent/SettingComponent';
 import { AudioComponent } from '../../../Framework/Script/Audio/AudioComponent';
-import { AudioManager } from '../Audio/AudioManager';
+import { AudioManager } from '../../../FrameworkUtil/Audio/AudioManager';
 import { AdComponent } from '../../../Framework/Script/Ad/AdComponent';
 import { PlatformComponent } from '../../CustomComponent/Platform/PlatformComponent';
 import {Component, Game, _decorator,director, macro,game } from "cc";
-import { UIManager } from '../UI/UIManager';
+import { UIManager } from '../../../FrameworkUtil/UI/UIManager';
 import { ProcedureComponent } from '../../../Framework/Script/Procedure/ProcedureComponent';
-import { NodeClicker } from '../NodeTouch/NodeClicker';
+import { NodeClicker } from '../../../FrameworkUtil/NodeTouch/NodeClicker';
 import { DataAnalysisComponent } from '../../CustomComponent/DataAnalysis/DataAnalysisComponent';
 const { ccclass, property } = _decorator;
 var timeScale = 1;

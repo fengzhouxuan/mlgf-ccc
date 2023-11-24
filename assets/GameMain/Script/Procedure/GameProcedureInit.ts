@@ -2,7 +2,7 @@ import { Fsm } from "../../../Framework/Script/Fsm/Fsm";
 import { ProcedureComponent } from "../../../Framework/Script/Procedure/ProcedureComponent";
 import { ProcedureBase } from "../../../Framework/Script/Procedure/Procedurease";
 import { GameProcedureDownLoadPackge } from "./GameProcedureDownLoadPackge";
-import { SplashLoading } from "../Scene/SplashLoading";
+import { SplashLoading } from "../../../FrameworkUtil/Scene/SplashLoading";
 import { GameEntry } from "../Base/GameEntry";
 
 //初始化流程

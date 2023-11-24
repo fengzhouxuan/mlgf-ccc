@@ -1,6 +1,6 @@
 import { AssetManager, EventTarget, Scene, SceneAsset, assetManager, director } from "cc";
-import { GameEntry } from "../Base/GameEntry";
-import { DRLevel } from "../DataTable/DRLevel";
+import { GameEntry } from "../../GameMain/Script/Base/GameEntry";
+import { DRLevel } from "../../GameMain/Script/DataTable/DRLevel";
 
 export class SceneManager{
     private static _inited:boolean;

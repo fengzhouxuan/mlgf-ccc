@@ -1,7 +1,8 @@
 import { Vec3 } from "cc";
 import { SpaceShipEntityData } from "../Entity/EntityData/SpaceShipEntityData";
-import { EntityManager } from "../Entity/EntityManager";
-import { UIFormId, UIManager } from "../UI/UIManager";
+import { UIManager } from "../../../FrameworkUtil/UI/UIManager";
+import { EntityUtil } from "../Entity/EntityUtil";
+import { UIFormId } from "../UI/UIUtil";
 
 export class GameMain{
     public static Instance:GameMain=null;
@@ -26,6 +27,6 @@ export class GameMain{
     private showSpaceShip(){
         let data = new SpaceShipEntityData(3);
         data.position = new Vec3(0,-2,0);
-        EntityManager.ShowSpaceShip(data);
+        EntityUtil.ShowSpaceShip(data);
     }
 }

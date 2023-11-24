@@ -1,9 +1,9 @@
 import { Sprite, SpriteFrame } from "cc";
-import { GameEntry } from "../Base/GameEntry";
+import { GameEntry } from "../../GameMain/Script/Base/GameEntry";
 import { AssetUtil } from "../Utils/AssetUtil";
-import { CloseUIFormCompleteEventArgs } from "../../../Framework/Script/UIComponent/CloseUIFormCompleteEventArgs";
-import { UIFormLogic } from "../../../Framework/Script/UIComponent/UIFormLogic";
-import { OpenUIFormSuccessEventArgs } from "../../../Framework/Script/UIComponent/OpenUIFormSuccessEventArgs";
+import { CloseUIFormCompleteEventArgs } from "../../Framework/Script/UIComponent/CloseUIFormCompleteEventArgs";
+import { UIFormLogic } from "../../Framework/Script/UIComponent/UIFormLogic";
+import { OpenUIFormSuccessEventArgs } from "../../Framework/Script/UIComponent/OpenUIFormSuccessEventArgs";
 
 export interface UIConfig {
     /** bundle包名 */
@@ -17,22 +17,18 @@ export interface UIConfig {
 }
 
 export interface DialogData {
-    uifromId: UIFormId;
+    uiformId: number;
     userData: object;
 }
 
-export enum UIFormId {
-    HomeForm = 1,
-    GameForm=2,
-}
 
 export var UIConfigData: { [key: number]: UIConfig } = {
-    [UIFormId.GameForm]: { bundleName: "Share", group: "Default", assetName: "UI/Form/GameForm", AllowMultiInstance: false, pauseCoveredUIForm: true },
+    // [UIFormId.GameForm]: { bundleName: "Share", group: "Default", assetName: "UI/Form/GameForm", AllowMultiInstance: false, pauseCoveredUIForm: true },
 }
 
 export class UIManager {
 
-    public static OpenGameUIForm(uiFormId: UIFormId, userData?: object): number {
+    public static OpenGameUIForm(uiFormId: number, userData?: object): number {
         let uiConfig = UIConfigData[uiFormId];
         if (!uiConfig.AllowMultiInstance) {
             if (GameEntry.ui.isLoadingUIFormWithAssetName(uiConfig.assetName)) {
@@ -45,7 +41,7 @@ export class UIManager {
         return GameEntry.ui.openUIForm(uiConfig.bundleName, uiConfig.assetName, uiConfig.group, uiConfig.pauseCoveredUIForm, userData);
     }
 
-    public static CloseUIForm(uiFormId:UIFormId,userData?:object){
+    public static CloseUIForm(uiFormId:number,userData?:object){
         let uiConfig = UIConfigData[uiFormId];
         let uiform = GameEntry.ui.getUIFormWithAssetName(uiConfig.assetName);
         if (!uiform) {
@@ -98,7 +94,6 @@ export class UIManager {
 
     public static pushDialog(dialogData: DialogData) {
         this._dialogs.push(dialogData);
-        // this.tryShowDialog();
     }
 
     public static pauseDialog(pause:boolean){
@@ -122,7 +117,7 @@ export class UIManager {
             return;
         }
         let dialog = this._dialogs.shift();
-        this._curDialogSerid = this.OpenGameUIForm(dialog.uifromId, dialog.userData);
+        this._curDialogSerid = this.OpenGameUIForm(dialog.uiformId, dialog.userData);
     }
 
     private static onCloseUIForm(sender: object, args: CloseUIFormCompleteEventArgs) {

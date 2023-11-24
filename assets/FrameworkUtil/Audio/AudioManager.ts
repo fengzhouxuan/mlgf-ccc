@@ -1,4 +1,4 @@
-import { GameEntry } from "../Base/GameEntry";
+import { GameEntry } from "../../GameMain/Script/Base/GameEntry";
 
 export interface AudioConfig {
     /** bundle包名 */
@@ -8,17 +8,12 @@ export interface AudioConfig {
     volume: number
 }
 
-export enum AudioId {
-    BGM = 1,
-    Button = 2,
-    Click = 3,
-    Merge=4
+enum BuiltInAudioId{
+    Button=1
 }
-export var UIConfigData: { [key: number]: AudioConfig } = {
-    [AudioId.BGM]: { bundleName: "Audio", assetName: "BGM", volume: 1 },
-    [AudioId.Button]: { bundleName: "Audio", assetName: "Buttons", volume: 0.2 },
-    [AudioId.Click]: { bundleName: "Audio", assetName: "Click", volume: 0.3 },
-    [AudioId.Merge]: { bundleName: "Audio", assetName: "Merge", volume: 1 },
+
+export var AudioConfigData: { [key: number]: AudioConfig } = {
+    [BuiltInAudioId.Button]: { bundleName: "Audio", assetName: "Buttons", volume: 0.2 },
 }
 export class AudioManager {
     private static _downloadCompleted = false;
@@ -45,7 +40,7 @@ export class AudioManager {
         }
     }
 
-    public static playMusic(id?: AudioId) {
+    public static playMusic(id?: number) {
         if (id) {
             this._musicId = id;
         }
@@ -59,7 +54,7 @@ export class AudioManager {
         if (musicId == null) {
             return;
         }
-        let data = UIConfigData[musicId];
+        let data = AudioConfigData[musicId];
         if (!data) {
             console.log("audio id 不存在" + musicId);
             return;
@@ -80,14 +75,14 @@ export class AudioManager {
         }
     }
 
-    public static playEffect(id: AudioId) {
+    public static playEffect(id: number) {
         if (GameEntry.user.getSoundMute()) {
             return;
         }
         if (!this._downloadCompleted) {
             return;
         }
-        let data = UIConfigData[id];
+        let data = AudioConfigData[id];
         if (!data) {
             console.log("audio id 不存在" + id);
             return;
@@ -96,7 +91,7 @@ export class AudioManager {
     }
 
     public static playButton() {
-        this.playEffect(AudioId.Button);
+        this.playEffect(BuiltInAudioId.Button);
     }
 
     public static vibrateShort(medium=false) {

@@ -1,9 +1,9 @@
 import { _decorator, Component, Node, Vec3 } from 'cc';
 import { GameEntityLogic } from '../../../../Framework/Script/EntityComponent/GameEntityLogic';
 import { BulletEntityData } from '../EntityData/BulletEntityData';
-import { EntityManager } from '../EntityManager';
+import { EntityManager } from '../../../../FrameworkUtil/Entity/EntityManager';
 import { SpaceShipEntityData } from '../EntityData/SpaceShipEntityData';
-import { EntityExtension } from '../EntityExtension';
+import { EntityUtil } from '../EntityUtil';
 const { ccclass, property } = _decorator;
 
 @ccclass('SpaceShipEntity')
@@ -44,7 +44,7 @@ export class SpaceShipEntity extends GameEntityLogic {
         let data = BulletEntityData.Create(4,new Vec3(0,1,0));
         data.position = this._firePoint.worldPosition;
         // EntityManager.ShowBullet(data);
-        EntityExtension.ShowBullet1(data);
+        EntityUtil.ShowBullet(data);
     }
 }
 

@@ -1,4 +1,4 @@
-import { UIEntityData } from "../../../CustomComponent/UIEntity/UIEntityData";
+import { UIEntityData } from "../../GameMain/CustomComponent/UIEntity/UIEntityData";
 
 
 export class UIParticleEntityData extends UIEntityData{
