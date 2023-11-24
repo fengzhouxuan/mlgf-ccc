@@ -19,7 +19,7 @@ onInit做初始化，只会调用一次，onShow在调用ShowEntity后调用，o
 ```ts
 GameEntry.event.on(ShowEntitySuccessEventArgs.EventId, this.onShowEntitySuccess, this);
 //在合适的地方注销事件
-GameEntry.event.off(ShowEntitySuccessEventArgs.EventId, this.onShowEntitySuccess, 
+GameEntry.event.off(ShowEntitySuccessEventArgs.EventId, this.onShowEntitySuccess, this);
 ```
 事件回调  
 ```ts
