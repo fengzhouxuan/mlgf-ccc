@@ -1,6 +1,6 @@
 import { OnAdCloseCallback } from "./AdComponent";
 
-export abstract class AdHelepr{
+export abstract class AdHelper{
     abstract get platformName():string;
     init(){
         this.onInit();

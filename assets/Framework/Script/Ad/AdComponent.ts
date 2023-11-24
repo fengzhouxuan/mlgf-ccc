@@ -1,6 +1,6 @@
 import { _decorator, Component, Node } from 'cc';
 import MlComponent from '../Base/MlComponent';
-import { AdHelepr } from './AdHelper';
+import { AdHelper } from './AdHelper';
 import { WECHAT } from 'cc/env';
 import { WxAdHelper } from './WxAdHelper';
 import { DefaultAdHelper } from './DefaultAdHelper';
@@ -15,7 +15,7 @@ export enum AdErrorCode{
 }
 @ccclass('AdComponent')
 export class AdComponent extends MlComponent {
-    private _adHelper:AdHelepr;
+    private _adHelper:AdHelper;
     protected start(): void {
         if(WECHAT){
             this._adHelper = new WxAdHelper();

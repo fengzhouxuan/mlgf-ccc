@@ -1,6 +1,6 @@
-import { AdHelepr } from "./AdHelper";
+import { AdHelper } from "./AdHelper";
 
-export class DefaultAdHelper extends AdHelepr{
+export class DefaultAdHelper extends AdHelper{
     get platformName(): string {
         return "default";
     }

@@ -1,9 +1,9 @@
 import { AdErrorCode, OnAdCloseCallback } from "./AdComponent";
-import { AdHelepr } from "./AdHelper";
+import { AdHelper } from "./AdHelper";
 
 let wx = window["wx"];
 
-export class WxAdHelper extends AdHelepr {
+export class WxAdHelper extends AdHelper {
     private _video = null;
     private _videoLoaded = false;
     private _currentCloseCallback: OnAdCloseCallback = null;
