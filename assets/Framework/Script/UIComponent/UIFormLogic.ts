@@ -46,7 +46,7 @@ export abstract class UIFormLogic extends Component {
         this._originalLayer = this.node.layer;
         let adapters = this.node.getComponentsInChildren(UIAdapter);
         adapters.forEach(element => {
-            element.Adaper();
+            element.Adapter();
         });
     }
 

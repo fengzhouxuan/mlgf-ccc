@@ -3,14 +3,14 @@ import MlComponent from "./MlComponent";
 export declare type Constructor<T = unknown> = new (...args: any[]) => T;
 
 export default class MlEntry {
-    private static _compoents: MlComponent[] = []
+    private static _components: MlComponent[] = []
 
-    public static regisiterComponent(component: MlComponent): void {
-        this._compoents.push(component);
+    public static registerComponent(component: MlComponent): void {
+        this._components.push(component);
     }
 
     public static getComponent<T extends MlComponent>(type: Constructor<T>): T |null {
-        for (const component of MlEntry._compoents) {
+        for (const component of MlEntry._components) {
             if (component instanceof type) {
                 return component;
             }
@@ -19,8 +19,8 @@ export default class MlEntry {
     }
 
     public static update(dt:number){
-        for (let i = 0; i < this._compoents.length; i++) {
-            const component = this._compoents[i];
+        for (let i = 0; i < this._components.length; i++) {
+            const component = this._components[i];
             component.onUpdate(dt);
             
         }

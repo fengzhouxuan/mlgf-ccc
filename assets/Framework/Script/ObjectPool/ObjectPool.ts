@@ -14,12 +14,12 @@ export class ObjectPool<T extends PoolObjectBase> extends ObjectPoolBase{
     private _autoReleaseTime: number;
     private _cachedCanReleaseObjects: Array<PoolObject<T>>;
     private _poolObjectReferencePool:ReferenceCollection=null;
-    constructor(name:string,autoRelaseInterval:number,expireTime:number,capacity:number){
+    constructor(name:string,autoReleaseInterval:number,expireTime:number,capacity:number){
         super(name);
         this._objects = new Array<PoolObject<T>>();
         this._cachedCanReleaseObjects = new Array<PoolObject<T>>();
-        this._poolObjectReferencePool = ReferencePool.create(PoolObject.CustomeUnitName);
-        this._autoReleaseInterval = autoRelaseInterval;
+        this._poolObjectReferencePool = ReferencePool.create(PoolObject.CustomUnitName);
+        this._autoReleaseInterval = autoReleaseInterval;
         this._expireTime = expireTime;
         this._capacity = capacity;
 
@@ -58,11 +58,11 @@ export class ObjectPool<T extends PoolObjectBase> extends ObjectPoolBase{
         this.release();
     }
 
-    public register(obj:T,spwan:boolean){
+    public register(obj:T,spawn:boolean){
         if(!obj){
             return;
         }
-        let poolObject = this._poolObjectReferencePool.acquire(PoolObject<T>).initialize(obj,spwan);
+        let poolObject = this._poolObjectReferencePool.acquire(PoolObject<T>).initialize(obj,spawn);
         this._objects.push(poolObject);
         if (this.count>this._capacity){
             this.release();
@@ -127,10 +127,11 @@ export class ObjectPool<T extends PoolObjectBase> extends ObjectPoolBase{
     }
         
     getCanReleaseObjects(): Array<PoolObject<T>>{
-        let canRealease = this._objects.filter(e=>{
-            return !e.isInUse;
+        let canRelease = this._objects.filter(e=>{
+            //判断lastUseTime为null，因为会提前填充对象池，提前填充的没有lastUseTime
+            return e.lastUseTime!=null && !e.isInUse;
         });
-        return canRealease;
+        return canRelease;
     }
 
     getUseableObject(name: string): Array<PoolObject<T>>{

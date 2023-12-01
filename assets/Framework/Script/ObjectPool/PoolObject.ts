@@ -7,7 +7,7 @@ export class PoolObject<T extends PoolObjectBase> implements IReference{
     private _object:T;
     private _spawnCount:number;
 
-    public static CustomeUnitName: string ="PoolObject";
+    public static CustomUnitName: string ="PoolObject";
     constructor(){
         this._spawnCount = 0;
         this._object = null;
@@ -23,7 +23,7 @@ export class PoolObject<T extends PoolObjectBase> implements IReference{
     }
 
     public get customUnitName(): string {
-        return PoolObject.CustomeUnitName;
+        return PoolObject.CustomUnitName;
     }
 
     clear() {

@@ -9,7 +9,7 @@ export class SimpleMoveAgent extends Component {
     private _curDuration: number = 0;
     private _targetPosition: Vec3;
     private _started = false;
-    private _orignalPos: Vec3;
+    private _originalPos: Vec3;
     private _midPos = new Vec3();
     private _running = false;
     private _changingPlace=false;
@@ -34,10 +34,10 @@ export class SimpleMoveAgent extends Component {
     public simpleMove(duration: number, targetPosition: Vec3) {
         this._running = true;
         this._curDuration = 0;
-        this._orignalPos = this.node.getWorldPosition();
+        this._originalPos = this.node.getWorldPosition();
         this._moveDuration = duration;
         this._targetPosition = targetPosition;
-        Vec3.subtract(this._midPos, targetPosition, this._orignalPos);
+        Vec3.subtract(this._midPos, targetPosition, this._originalPos);
         this._midPos.y = 0;
         this._midPos.normalize();
 
@@ -52,7 +52,7 @@ export class SimpleMoveAgent extends Component {
         this._moveDuration = 0;
         this._curDuration = 0;
         this._targetPosition = null;
-        this._orignalPos = null;
+        this._originalPos = null;
         this._running=false;
         this._changingPlace=false;
     }
@@ -63,7 +63,7 @@ export class SimpleMoveAgent extends Component {
         }
         this._curDuration += deltaTime;
         let t = math.clamp01(this._curDuration / this._moveDuration);
-        Vec3.lerp(this._midPos, this._orignalPos, this._targetPosition, t);
+        Vec3.lerp(this._midPos, this._originalPos, this._targetPosition, t);
         this.node.setWorldPosition(this._midPos);
         if (t >= 1) {
             this._started = false;

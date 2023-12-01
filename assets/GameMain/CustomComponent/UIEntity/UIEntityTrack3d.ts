@@ -22,7 +22,7 @@ export class UIEntityTrack3d extends UIEntity {
         if (this._entityData.target3d) {
             this._tracker.Track();
         } else {
-            let pos = this._tracker.getUIPositionForm3dPosition(this._entityData.targetd3dPosition);
+            let pos = this._tracker.getUIPositionForm3dPosition(this._entityData.target3dPosition);
             pos.z = 0;
             this.node.setPosition(pos);
         }

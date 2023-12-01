@@ -33,10 +33,9 @@ export class SceneManager{
         this._event.removeAll(this);
     }
 
-    public static OpenScene(sceenId: number){
+    public static OpenScene(sceneId: number){
 
-        let sceneData = GameEntry.dataTable.getDataTable(DRLevel).getRow(e=>e.id==sceenId);
-        let dres1 = Date.now();
+        let sceneData = GameEntry.dataTable.getDataTable(DRLevel).getRow(e=>e.id==sceneId);
         GameEntry.res.LoadSceneInBundle(sceneData.bundle,sceneData.levelConfig, null, (f:number,t:number,item:AssetManager.RequestItem)=>{
             this.Emit(this.ProgressEvent,f,t);
         },
@@ -45,9 +44,7 @@ export class SceneManager{
 
             }, () => {
                 let d = Date.now();
-                let dif = d - dres1;
                 this.Emit(this.CompleteEvent);
-                console.log("----load time: " + dif + " ms----");
             });
         }, null);
     }

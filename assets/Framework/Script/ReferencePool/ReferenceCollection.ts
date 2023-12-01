@@ -2,7 +2,7 @@ import { IReference } from "./IReference";
 import { Constructor } from "../Base/MlEntry";
 
 export class ReferenceCollection{
-    private _refrences: IReference[] = [];
+    private _references: IReference[] = [];
     private _collectionName:string;
 
     
@@ -12,27 +12,27 @@ export class ReferenceCollection{
     
     constructor(collectionName: string){
         this._collectionName = collectionName;
-        this._refrences =[];
+        this._references =[];
     }
 
     public acquire<T extends IReference>(ctor: Constructor<T>): T {
-        if (this._refrences.length > 0) {
-            return this._refrences.shift() as T;
+        if (this._references.length > 0) {
+            return this._references.shift() as T;
         }
         return new ctor();
     }
 
     public release(reference: IReference){
         reference.clear();
-        if (this._refrences.indexOf(reference)>=0){
+        if (this._references.indexOf(reference)>=0){
             console.error("引用重复回收");
             return;
         }
-        this._refrences.push(reference);
+        this._references.push(reference);
     }
 
     public removeAll(){
-        this._refrences.length=0;
+        this._references.length=0;
     }
 
 }

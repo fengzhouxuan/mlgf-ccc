@@ -12,7 +12,7 @@ export class UIAdapter extends Component {
     @property
     bottomOffset = 0;
 
-    Adaper(){
+    Adapter(){
         this._adapter();
     }
 

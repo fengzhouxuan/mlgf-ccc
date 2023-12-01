@@ -35,7 +35,7 @@ export class AStarObstacle extends Component {
 
     public reset(){
         this._point=null;
-        this._obsEnable=false;
+        this.hide();
     }
 
     public show(){

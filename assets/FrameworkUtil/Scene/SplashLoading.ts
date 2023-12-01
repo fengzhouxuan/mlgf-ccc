@@ -4,7 +4,7 @@ const { ccclass, property } = _decorator;
 @ccclass('SplashLoading')
 export class SplashLoading extends Component {
     // private _progressBar:ProgressBar;
-    private _tiplabel:Label;
+    private _tipLabel:Label;
     private _simuValue:number=0;
     private _realValue:number=0;
     private  static _contentString:string;
@@ -12,19 +12,19 @@ export class SplashLoading extends Component {
     private static _instance:SplashLoading;
     private static _destroyed:boolean;
     
-    public static isDesroyed() : boolean {
+    public static isDestroyed() : boolean {
         return SplashLoading._destroyed;
     }
     
     protected onLoad(): void {
         SplashLoading._instance=this;
         // this._progressBar = this.node.getComponentInChildren(ProgressBar);
-        this._tiplabel = this.node.getComponentInChildren(Label);
+        this._tipLabel = this.node.getComponentInChildren(Label);
         SplashLoading._contentString = "正在加载...";
     }
     protected onEnable(): void {
         // this._progressBar.progress=0;
-        this._tiplabel.string="";
+        this._tipLabel.string="";
     }
 
     protected update(dt: number): void {
@@ -35,7 +35,7 @@ export class SplashLoading extends Component {
         simu = Math.min(simu,this._maxSimuValue);
         this._simuValue = simu;
         let progress = Math.round(Math.max(this._simuValue,this._realValue)*100);
-        this._tiplabel.string = `${SplashLoading._contentString}${progress}%`;
+        this._tipLabel.string = `${SplashLoading._contentString}${progress}%`;
     }
 
     protected onDisable(): void {

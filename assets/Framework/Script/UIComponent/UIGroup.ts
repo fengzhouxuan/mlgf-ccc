@@ -101,7 +101,7 @@ export class UIGroup{
     public hasUIFormWithAssetName(assetName:string):boolean{
         for (let i = 0; i < this._uiFormInfos.length; i++) {
             const uiFormInfo = this._uiFormInfos[i];
-            if (uiFormInfo.uiForm.uiFormAssetname == assetName) {
+            if (uiFormInfo.uiForm.uiFormAssetName == assetName) {
                 return true;
             }
         }
@@ -121,16 +121,16 @@ export class UIGroup{
     public getUIFormWithAssetName(assetName:string):UIForm{
         for (let i = 0; i < this._uiFormInfos.length; i++) {
             const uiFormInfo = this._uiFormInfos[i];
-            if (uiFormInfo.uiForm.uiFormAssetname == assetName) {
+            if (uiFormInfo.uiForm.uiFormAssetName == assetName) {
                 return uiFormInfo.uiForm;
             }
         }
         return null;
     }
 
-    public getAllUIFromsNoAlloc(results:UIForm[]):UIForm[]{
+    public getAllUIFormsNoAlloc(results:UIForm[]):UIForm[]{
         if(results==null || results ==undefined){
-            console.error(" resultse为out型的参数，必须先初始化");
+            console.error(" results为out型的参数，必须先初始化");
             return;
         }
         results.length=0;
@@ -149,7 +149,7 @@ export class UIGroup{
     public internalGetAllUIFormsWithAssetName(assetName:string,results:UIForm[]){
         for (let i = 0; i < this._uiFormInfos.length; i++) {
             const uiFormInfo = this._uiFormInfos[i];
-            if (uiFormInfo.uiForm.uiFormAssetname == assetName) {
+            if (uiFormInfo.uiForm.uiFormAssetName == assetName) {
                 results.push(uiFormInfo.uiForm);
             }
         }
@@ -163,7 +163,7 @@ export class UIGroup{
     public removeUIForm(uiForm:UIForm){
         let uiFormInfo = this.getUIFormInfo(uiForm);
         if(!uiFormInfo){
-            console.error(`找不到UIForm,id为${uiForm.serialId},资源名为${uiForm.uiFormAssetname}`);
+            console.error(`找不到UIForm,id为${uiForm.serialId},资源名为${uiForm.uiFormAssetName}`);
             return;
         }
         if(!uiFormInfo.covered){
@@ -181,7 +181,7 @@ export class UIGroup{
     public refocusUIForm(uiForm:UIForm){
         let uiFormInfo = this.getUIFormInfo(uiForm);
         if (!uiFormInfo) {
-            console.error(`找不到UIForm,id为${uiForm.serialId},资源名为${uiForm.uiFormAssetname}`);
+            console.error(`找不到UIForm,id为${uiForm.serialId},资源名为${uiForm.uiFormAssetName}`);
             return;
         }
         js.array.remove(this._uiFormInfos, uiFormInfo);

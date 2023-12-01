@@ -8,14 +8,14 @@ export interface INodeClickable {
 
 @ccclass('NodeClickable')
 export class NodeClickable extends Component {
-    public delegete: INodeClickable;
+    public delegate: INodeClickable;
     onClick() {
-        this.delegete?.onNodeClick(this.node);
+        this.delegate?.onNodeClick(this.node);
     }
 
     canClick() {
-        if (this.delegete?.canNodeClick) {
-            return this.delegete.canNodeClick(this.node);
+        if (this.delegate?.canNodeClick) {
+            return this.delegate.canNodeClick(this.node);
         }
         return true;
     }

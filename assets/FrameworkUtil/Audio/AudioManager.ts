@@ -26,7 +26,7 @@ export class AudioManager {
         let onProgress = function (res) {
 
         }
-        GameEntry.platform.loadPackge("Audio", function (res) {
+        GameEntry.platform.loadPackage("Audio", function (res) {
             this.onDownloadComplete();
         }.bind(this),
             onFail.bind(this),

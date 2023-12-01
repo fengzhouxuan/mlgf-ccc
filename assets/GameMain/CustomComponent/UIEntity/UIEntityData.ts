@@ -6,7 +6,7 @@ const { ccclass } = _decorator;
 export class UIEntityData extends EntityData{
     public uiGroupName:string;
     public target3d:Node;
-    public targetd3dPosition:Vec3;
+    public target3dPosition:Vec3;
     public offset:Vec3=new Vec3();
 }
 

@@ -73,13 +73,7 @@ export class ResourceComponent extends MlComponent {
         options?: IBundleOptions | CompleteCallback<AssetManager.Bundle> | null,
         onComplete?: CompleteCallback<AssetManager.Bundle> | null,
         userData?: CompleteCallback<AssetManager.Bundle> | object | null): void {
-        // if (assetManager.bundles.has(nameOrUrl)) {
-        //     var bundle = assetManager.getBundle(nameOrUrl);
-        //     if (onComplete) {
-        //         onComplete(null, bundle, userData);
-        //     }
-        //     return;
-        // }
+
         assetManager.loadBundle(nameOrUrl, options, (error: Error, res: AssetManager.Bundle) => {
             if (onComplete) {
                 onComplete(error, res, userData);
@@ -129,10 +123,7 @@ export class ResourceComponent extends MlComponent {
         onProgress: ProgressCallback | null,
         onComplete: CompleteCallback<SceneAsset> | null,
         userData?: object | null): void {
-        let dres1 = Date.now();
         this.LoadBundle(bundleNameOrUrl, bundleOptions, (err: Error, bundle: AssetManager.Bundle) => {
-            let dres2 = Date.now();
-            console.log("----load res time: " + (dres2 - dres1) + " ms----");
             this.LoadSceneFormBundle(bundle, sceneName, bundleOptions, onProgress, onComplete, userData);
         });
         
@@ -141,10 +132,7 @@ export class ResourceComponent extends MlComponent {
     public LoadSceneFormBundle(bundle: AssetManager.Bundle, sceneName: string, bundleOptions: IBundleOptions | null,
         onProgress: ProgressCallback | null,
         onComplete: CompleteCallback<SceneAsset> | null, userData: object) {
-        let dres1 = Date.now();
         bundle.loadScene(sceneName, bundleOptions, onProgress, (error: Error, res: SceneAsset) => {
-            let dres2 = Date.now();
-            console.log("----load scene time: " + (dres2 - dres1) + " ms----");
             if (onComplete) {
                 onComplete(error, res, userData);
             }

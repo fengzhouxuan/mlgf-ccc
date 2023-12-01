@@ -11,7 +11,7 @@ export class UserComponent extends MlComponent {
     private _data: UserSettingData = null;
     private _settingComponent: SettingComponent;
 
-    private _shoudleSave=false;
+    private _shouldSave=false;
     protected start(): void {
         this._settingComponent = MlEntry.getComponent(SettingComponent);
         this.init();
@@ -19,10 +19,10 @@ export class UserComponent extends MlComponent {
 
     onUpdate(dt: number): void {
         super.onUpdate(dt);
-        if(this._shoudleSave){
+        if(this._shouldSave){
             this._data.gameTimestamp = Date.now();
             this._settingComponent.set(this._settingKey, this._data);
-            this._shoudleSave=false;
+            this._shouldSave=false;
         }
     }
 
@@ -49,7 +49,7 @@ export class UserComponent extends MlComponent {
     }
 
     public save() {
-        this._shoudleSave=true;
+        this._shouldSave=true;
     }
     private initData() {
         this._data = new UserSettingData();

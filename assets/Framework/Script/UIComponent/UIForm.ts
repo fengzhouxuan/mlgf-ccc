@@ -16,7 +16,7 @@ export class UIForm extends Component {
         return this._serialId;
     }
     
-    public get uiFormAssetname() : string {
+    public get uiFormAssetName() : string {
         return this._uiFormAssetName;
     }
 
@@ -50,6 +50,7 @@ export class UIForm extends Component {
             return;
         }
         //TODO:这里的报错是ccc的bug，这是报错不影响运行时
+        //@ts-ignore
         this._uiFormLogic = this.node.getComponent(UIFormLogic);
         if(!this.uiFormLogic){
             console.error("UI节点没有绑定GameFormLogic脚本");

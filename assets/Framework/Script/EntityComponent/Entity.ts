@@ -18,7 +18,7 @@ export class Entity extends Component{
         return this._entityId;
     }
     
-    public get enittyAssetName() : string {
+    public get entityAssetName() : string {
         return this._entityAssetName;
     }
     

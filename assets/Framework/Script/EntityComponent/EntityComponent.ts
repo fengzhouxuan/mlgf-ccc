@@ -165,7 +165,7 @@ export class EntityComponent extends MlComponent {
         }
         return results;
     }
-    public getAllLoadingEntitiyIds(): number[] {
+    public getAllLoadingEntityIds(): number[] {
         let results: number[] = [];
         for (const [key, value] of this._entitiesBeingLoaded) {
             results.push(key);
@@ -437,7 +437,6 @@ export class EntityComponent extends MlComponent {
         entityInfo.entityStatus = EntityStatus.Showed;
         let showEntitySuccessArgs = this._showEntitySuccessEventArgsReferencePool.acquire(ShowEntitySuccessEventArgs).initialize(entity, duration, userData);
         this._eventComponent.emit(this, showEntitySuccessArgs);
-        // this._showEntitySuccessEventArgsReferencePool.release(showEntitySuccessArgs);
         this._showEntityInfoReferencePool.release(userData as ShowEntityInfo);
     }
 
@@ -467,9 +466,8 @@ export class EntityComponent extends MlComponent {
             console.error(`实体${entity.entityId}不在entityComponent中`);
             return;
         }
-        let hideEntityCompleteEventArgs = this._hideEntityCompleteEventArgsReferencePool.acquire(HideEntityCompleteEventArgs).initialize(entity.entityId, entity.enittyAssetName,entityGroup,userData);
+        let hideEntityCompleteEventArgs = this._hideEntityCompleteEventArgsReferencePool.acquire(HideEntityCompleteEventArgs).initialize(entity.entityId, entity.entityAssetName,entityGroup,userData);
         this._eventComponent.emit(this,hideEntityCompleteEventArgs);
-        // this._hideEntityCompleteEventArgsReferencePool.release(hideEntityCompleteEventArgs);
         this._recycleQueue.push(entityInfo);
     }
 

@@ -78,7 +78,7 @@ export class EntityGroup{
     public removeEntity(entity:Entity){
         let index = this._entities.indexOf(entity);
         if(index<0){
-            console.warn(`实体组 ${this.name} 中不存在实体 [${entity.entityId}] ,资源为${entity.enittyAssetName}`);
+            console.warn(`实体组 ${this.name} 中不存在实体 [${entity.entityId}] ,资源为${entity.entityAssetName}`);
             return;
         }
         this._entities.splice(index,1);

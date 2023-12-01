@@ -1,6 +1,6 @@
 import { Fsm } from "../../../Framework/Script/Fsm/Fsm";
 import { ProcedureComponent } from "../../../Framework/Script/Procedure/ProcedureComponent";
-import { ProcedureBase } from "../../../Framework/Script/Procedure/Procedurease";
+import { ProcedureBase } from "../../../Framework/Script/Procedure/ProcedureBase";
 import { GameProcedureMainGame } from "./GameProcedureMainGame";
 import { GameEntry } from "../Base/GameEntry";
 import { LoadDataTableSuccessEventArgs } from "../../../Framework/Script/DataTableComponent/LoadDataTableSuccessEventArgs";

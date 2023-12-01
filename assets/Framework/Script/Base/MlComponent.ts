@@ -8,7 +8,7 @@ const { ccclass, property } = _decorator;
 export default class MlComponent extends Component {
 
     protected onLoad(): void {
-        MlEntry.regisiterComponent(this);
+        MlEntry.registerComponent(this);
     }
 
     onUpdate(dt:number){

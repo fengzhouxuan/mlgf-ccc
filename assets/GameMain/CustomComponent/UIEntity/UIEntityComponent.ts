@@ -2,16 +2,16 @@ import { _decorator, Camera, Component, Node } from 'cc';
 import MlComponent from '../../../Framework/Script/Base/MlComponent';
 const { ccclass, property } = _decorator;
 
-@ccclass('UIEnittyComponent')
+@ccclass('UIEntityComponent')
 export class UIEntityComponent extends MlComponent {
-    private _mainCamea:Camera=null;
+    private _mainCamera:Camera=null;
 
     get mainCamera():Camera{
-        return this._mainCamea ||null;
+        return this._mainCamera ||null;
     }
 
     public set mainCamera(v: Camera) {
-        this._mainCamea = v;
+        this._mainCamera = v;
     }
 }
 

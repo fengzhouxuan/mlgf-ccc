@@ -5,8 +5,8 @@ import { GameEntry } from "../../../GameMain/Script/Base/GameEntry";
 export abstract class EntityLogic extends Component{
     private _available:boolean;
     private _visible:boolean;
-    private _orignalLayer:number;
-    private _orignalParentNode:Node;
+    private _originalLayer:number;
+    private _originalParentNode:Node;
     private _entity:Entity;
 
     
@@ -34,8 +34,8 @@ export abstract class EntityLogic extends Component{
         return this._visible && this._available;
     }
     
-    public get orignalParentNode() : Node {
-        return this._orignalParentNode;
+    public get originalParentNode() : Node {
+        return this._originalParentNode;
     }
     
 
@@ -53,8 +53,8 @@ export abstract class EntityLogic extends Component{
 
     onInit(userData:object){
         this._entity = this.getComponent(Entity);
-        this._orignalLayer = this.node.layer;
-        this._orignalParentNode = this.node.parent;
+        this._originalLayer = this.node.layer;
+        this._originalParentNode = this.node.parent;
     }
 
     onRecycle(){}
@@ -70,7 +70,7 @@ export abstract class EntityLogic extends Component{
     }
 
     onHide(userData:object){
-        this.node.layer = this._orignalLayer;
+        this.node.layer = this._originalLayer;
         this.visible = false;
         this._available = false;
     }
@@ -109,7 +109,7 @@ export abstract class EntityLogic extends Component{
      * @param userData 
      */
     onDetachFromParent(parentEntity: EntityLogic, userData: object){
-        this.node.setParent(this._orignalParentNode,true);
+        this.node.setParent(this._originalParentNode,true);
     }
 
     private internalSetVisible(visible:boolean){

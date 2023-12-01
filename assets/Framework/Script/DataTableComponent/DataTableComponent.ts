@@ -56,7 +56,6 @@ export class DataTableComponent extends MlComponent {
                 this._config = json;
                 let loadDataTableSuccessEventArgs = this._loadDataTableSuccessEventArgsReferencePool.acquire(LoadDataTableSuccessEventArgs).initialize(configName);
                 this._eventComponent.emit(this, loadDataTableSuccessEventArgs);
-                // this._loadDataTableSuccessEventArgsReferencePool.release(loadDataTableSuccessEventArgs);
             });
     }
 
@@ -76,7 +75,6 @@ export class DataTableComponent extends MlComponent {
                 this.addDataTable<T>(tableName,ctor,json);
                 let loadDataTableSuccessEventArgs = this._loadDataTableSuccessEventArgsReferencePool.acquire(LoadDataTableSuccessEventArgs).initialize(tableName);
                 this._eventComponent.emit(this, loadDataTableSuccessEventArgs);
-                // this._loadDataTableSuccessEventArgsReferencePool.release(loadDataTableSuccessEventArgs);
             });
     }
 
@@ -96,7 +94,6 @@ export class DataTableComponent extends MlComponent {
                 }
                 let loadDataTableSuccessEventArgs = this._loadDataTableSuccessEventArgsReferencePool.acquire(LoadDataTableSuccessEventArgs).initialize(configAssetName);
                 this._eventComponent.emit(this, loadDataTableSuccessEventArgs);
-                // this._loadDataTableSuccessEventArgsReferencePool.release(loadDataTableSuccessEventArgs);
             });
     }
 

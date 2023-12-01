@@ -11,7 +11,7 @@ export class PlatformHelper{
         game.frameRate=rate;
     }
 
-    loadPackge(name:string,success:Function,fail?:Function,progress?:Function){
+    loadPackage(name:string,success:Function,fail?:Function,progress?:Function){
         success();
     }
 
@@ -25,7 +25,7 @@ export class PlatformHelper{
 
     triggerGC(){}
 
-    shareTmplate(callback:Function){
+    shareTemplate(callback:Function){
         callback(0);
     }
 

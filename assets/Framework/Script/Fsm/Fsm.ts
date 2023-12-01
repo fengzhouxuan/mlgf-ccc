@@ -7,7 +7,7 @@ export class Fsm<T>{
     private _name:string;
     private _owner:T=null;
     private _states:Map<Constructor<FsmState<T>>,FsmState<T>>;
-    private _datas:Map<string,object>;
+    private _data:Map<string,object>;
     private _currentState:FsmState<T>=null;
     private _currentStateTime:number=0;
     private _isDestroyed:boolean=false;
@@ -17,7 +17,7 @@ export class Fsm<T>{
         this._name = null;
         this._owner=null;
         this._states = new Map<Constructor<FsmState<T>>,FsmState<T>>;
-        this._datas = new Map<string,object>;
+        this._data = new Map<string,object>;
         this._currentState = null;
         this._currentStateTime=0;
         this._isDestroyed = false;
@@ -112,18 +112,18 @@ export class Fsm<T>{
     }
 
     public hasData(key:string):boolean{
-        return this._datas.has(key);
+        return this._data.has(key);
     }
 
     public getData(key:string):any{
-        return this._datas.get(key);
+        return this._data.get(key);
     }
     public setData(key:string,value:any){
-        this._datas.set(key,value);
+        this._data.set(key,value);
     }
 
-    public remoevDate(key:string):boolean{
-       return this._datas.delete(key);
+    public removeDate(key:string):boolean{
+       return this._data.delete(key);
     }
     
     public update(dt:number){
@@ -144,7 +144,7 @@ export class Fsm<T>{
          this._name=null;
          this._owner=null;
          this._states.clear();
-         this._datas.clear();
+         this._data.clear();
          this._currentState = null;
          this._currentStateTime=0;
          this._isDestroyed=true;

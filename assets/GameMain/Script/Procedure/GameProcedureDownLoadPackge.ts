@@ -1,6 +1,6 @@
 import { Fsm } from "../../../Framework/Script/Fsm/Fsm";
 import { ProcedureComponent } from "../../../Framework/Script/Procedure/ProcedureComponent";
-import { ProcedureBase } from "../../../Framework/Script/Procedure/Procedurease";
+import { ProcedureBase } from "../../../Framework/Script/Procedure/ProcedureBase";
 import { GameEntry } from "../Base/GameEntry";
 import { SplashLoading } from "../../../FrameworkUtil/Scene/SplashLoading";
 import { GameProcedurePreload } from "./GameProcedurePreload";
@@ -35,6 +35,6 @@ export class GameProcedureDownLoadPackge extends ProcedureBase{
       let onProgress = function (res) {
         SplashLoading.SetProgress(res);
       }
-      GameEntry.platform.loadPackge(name, onSuccess.bind(this), onFail.bind(this), onProgress.bind(this));
+      GameEntry.platform.loadPackage(name, onSuccess.bind(this), onFail.bind(this), onProgress.bind(this));
     }
 }

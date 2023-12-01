@@ -5,12 +5,12 @@ import { EventNode } from './EventNode';
 import { ReferencePool } from '../ReferencePool/ReferencePool';
 const { ccclass, property } = _decorator;
 
-export type ListenerFunc = (sneder:object, args: BaseEventArgs) => void
+export type ListenerFunc = (sender:object, args: BaseEventArgs) => void
 class EventHandler{
-    listenter:ListenerFunc;
+    listener:ListenerFunc;
     context:object;
-    constructor(listenter:ListenerFunc,context:object){
-        this.listenter = listenter;
+    constructor(listener:ListenerFunc,context:object){
+        this.listener = listener;
         this.context = context;
     }
 }
@@ -28,7 +28,7 @@ export class EventComponent extends MlComponent {
             handlers.push(new EventHandler(listener, context));
             return;
         }
-        let hasSameListenerAndContext = handlers.find(e => e.context == context && e.listenter == listener) != null;
+        let hasSameListenerAndContext = handlers.find(e => e.context == context && e.listener == listener) != null;
         if (hasSameListenerAndContext){
             console.warn(`对象《${context.constructor.name}》--重复注册了事件--《${eventId}》`);
             return;
@@ -42,7 +42,7 @@ export class EventComponent extends MlComponent {
             return;
         }
         let handlers = this.getEventHandlers(eventId);
-        let targetHandler = handlers.find(e => e.context == context && e.listenter == listener);
+        let targetHandler = handlers.find(e => e.context == context && e.listener == listener);
         if(!targetHandler){
             console.warn(`对象《${context.constructor.name}》--并没有注册事件--《${eventId}》`);
             return;
@@ -65,7 +65,7 @@ export class EventComponent extends MlComponent {
         let handlers = this.getEventHandlers(args.eventId);
         for (let index = 0; index < handlers.length; index++) {
             let handler = handlers[index];
-            handler.listenter.call(handler.context,sender,args);
+            handler.listener.call(handler.context,sender,args);
         }
     }
 

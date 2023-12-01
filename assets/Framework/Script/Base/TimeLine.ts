@@ -91,10 +91,10 @@ export class TimeLineItem {
     private _repeated = 0;
     private _intervalAddOneTurn = 0;
     private _intervalAdd =null;
-    private _thisAgrs: any;
+    private _thisArgs: any;
 
     constructor(thisArgs: any) {
-        this._thisAgrs = thisArgs;
+        this._thisArgs = thisArgs;
         this._intervalAdd = null;
     }
 
@@ -114,15 +114,15 @@ export class TimeLineItem {
     public addInterval(interval: number): boolean {
         if(this._intervalAdd==null){
             this._intervalAdd=0;
-            this.startCallback?.call(this._thisAgrs,this)
+            this.startCallback?.call(this._thisArgs,this)
         }
         this._intervalAdd += interval;
         this._intervalAddOneTurn += interval;
-        this.updateCallback?.call(this._thisAgrs, this, interval, this._intervalAddOneTurn,this.interval);
+        this.updateCallback?.call(this._thisArgs, this, interval, this._intervalAddOneTurn,this.interval);
         if (this._intervalAddOneTurn >= this.interval) {
             this._intervalAddOneTurn = 0;
             this._repeated++;
-            this.endCallback?.call(this._thisAgrs, this);
+            this.endCallback?.call(this._thisArgs, this);
             if (this.repeat !== TimeLine.REPEAT_FOREVER) {
                 if (this._repeated >= this.repeat) {
                     this.stop();

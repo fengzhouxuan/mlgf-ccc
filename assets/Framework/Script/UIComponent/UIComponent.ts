@@ -23,7 +23,7 @@ const { ccclass, property} = _decorator;
 export class UIComponent extends MlComponent{
     private _uiGroups: Map<string, UIGroup> = new Map<string, UIGroup>;
     private _uiFormBeingLoaded: Map<number, string> = new Map<number, string>;
-    private _uiFormsToReleaseonLoad:Set<number> =new Set<number>;
+    private _uiFormsToReleaseLoad:Set<number> =new Set<number>;
     private _recycleQueue:UIForm[]=[];
     private _resourceComponent: ResourceComponent = null;
     private _objectPoolComponent: ObjectPoolComponent = null;
@@ -82,11 +82,11 @@ export class UIComponent extends MlComponent{
         this._uiFormInstanceReferencePool = ReferencePool.create(UIFormInstanceObject.CustomUnitName);
 
         if(!this.uiInstanceRoot){
-            console.error("uiIntaneRoot 不存在，请先设置uiIntaneRoot，必须包含Canvas组件");
+            console.error("uiInstanceRoot 不存在，请先设置uiInstanceRoot，必须包含Canvas组件");
             return;
         }
         if(!this.uiInstanceRoot.getComponent(Canvas)){
-            console.error("uiIntaneRoot必须包含Canvas组件");
+            console.error("uiInstanceRoot必须包含Canvas组件");
             return;
         }
         for (let i = 0; i < this.uiGroupConfigs.length; i++) {
@@ -303,7 +303,7 @@ export class UIComponent extends MlComponent{
 
     public closeUIFormBySerialId(serialId:number,userData:object){
         if(this.isLoadingUIForm(serialId)){
-            this._uiFormsToReleaseonLoad.add(serialId);
+            this._uiFormsToReleaseLoad.add(serialId);
             this._uiFormBeingLoaded.delete(serialId);
             return;
         }
@@ -329,9 +329,8 @@ export class UIComponent extends MlComponent{
         uiForm.onClose(userData);
         uiGroup.refresh();
 
-        let closeUIFormCompleteEventArgs = this._closeUIFormCompleteEventArgsReferencePool.acquire(CloseUIFormCompleteEventArgs).initialize(uiForm.serialId,uiForm.uiFormAssetname,uiGroup,userData);
+        let closeUIFormCompleteEventArgs = this._closeUIFormCompleteEventArgsReferencePool.acquire(CloseUIFormCompleteEventArgs).initialize(uiForm.serialId,uiForm.uiFormAssetName,uiGroup,userData);
         this._eventComponent.emit(this,closeUIFormCompleteEventArgs);
-        // this._closeUIFormCompleteEventArgsReferencePool.release(closeUIFormCompleteEventArgs);
         this._recycleQueue.push(uiForm);
     }
 
@@ -348,7 +347,7 @@ export class UIComponent extends MlComponent{
 
     public closeAllLoadingUIForms(){
         for (const [key, value] of this._uiFormBeingLoaded) {
-            this._uiFormsToReleaseonLoad.add(key);
+            this._uiFormsToReleaseLoad.add(key);
         }
         this._uiFormBeingLoaded.clear();
     }
@@ -375,16 +374,16 @@ export class UIComponent extends MlComponent{
         }
         if(err){
             console.log(`UIForm资源加载失败,${err.message}`);
-            if(this._uiFormsToReleaseonLoad.has(loadUIFormInfo.serialId)){
-                this._uiFormsToReleaseonLoad.delete(loadUIFormInfo.serialId);
+            if(this._uiFormsToReleaseLoad.has(loadUIFormInfo.serialId)){
+                this._uiFormsToReleaseLoad.delete(loadUIFormInfo.serialId);
                 return;
             }
             this._uiFormBeingLoaded.delete(loadUIFormInfo.serialId);
             return;
         }
 
-        if(this._uiFormsToReleaseonLoad.has(loadUIFormInfo.serialId)){
-            this._uiFormsToReleaseonLoad.delete(loadUIFormInfo.serialId);
+        if(this._uiFormsToReleaseLoad.has(loadUIFormInfo.serialId)){
+            this._uiFormsToReleaseLoad.delete(loadUIFormInfo.serialId);
             this._loadUIFormReferencePool.release(loadUIFormInfo);
             this._uiFormHelper.releaseUIForm(uiFormAsset,null);
             return;
@@ -415,7 +414,6 @@ export class UIComponent extends MlComponent{
 
         let openIOFormSuccessEventArgs= this._openUIFormSuccessEventArgsReferencePool.acquire(OpenUIFormSuccessEventArgs).initialize(uiFrom,duration,userData);
         this._eventComponent.emit(this, openIOFormSuccessEventArgs);
-        // this._openUIFormSuccessEventArgsReferencePool.release(openIOFormSuccessEventArgs);
 
     }
 }

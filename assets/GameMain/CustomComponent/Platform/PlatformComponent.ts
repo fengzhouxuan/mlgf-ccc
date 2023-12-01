@@ -66,8 +66,8 @@ export class PlatformComponent extends MlComponent {
     triggerGC(){
         this._helper.triggerGC();
     }
-    shareTmplate(callback:Function){
-        this._helper.shareTmplate(callback);
+    shareTemplate(callback:Function){
+        this._helper.shareTemplate(callback);
     }
 
     vibrateShort(){
@@ -83,8 +83,8 @@ export class PlatformComponent extends MlComponent {
     }
 
     //加载包
-    loadPackge(name:string,success:Function,fail?:Function,progress?:Function){
-        this._helper.loadPackge(name,success,fail,progress);
+    loadPackage(name:string,success:Function,fail?:Function,progress?:Function){
+        this._helper.loadPackage(name,success,fail,progress);
     }
 
     httpRequest(url:string,data:object,method:string,success:Function,fail:Function){
@@ -95,7 +95,7 @@ export class PlatformComponent extends MlComponent {
         this._helper.login("https://api.xxx/game-common/user/login",success,fail);
     }
 
-    requstPostUserData(){
+    requestPostUserData(){
         this._postUserDataFlag=true;
     }
 

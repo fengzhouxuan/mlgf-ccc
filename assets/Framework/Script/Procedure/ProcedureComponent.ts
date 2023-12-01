@@ -1,7 +1,7 @@
 import { CCString, _decorator } from 'cc';
 import MlComponent from '../Base/MlComponent';
 import { Fsm } from '../Fsm/Fsm';
-import { ProcedureBase } from './Procedurease';
+import { ProcedureBase } from './ProcedureBase';
 import { Constructor } from '../Base/MlEntry';
 import { ClassUtils } from '../Utils/ClassUtils';
 import { ProcedureHelper } from './ProcedureHelper';
@@ -18,7 +18,7 @@ export class ProcedureComponent extends MlComponent {
     private _fsm:Fsm<ProcedureComponent>;
 
     
-    public get currentPorcedure() : ProcedureBase {
+    public get currentProcedure() : ProcedureBase {
         return this._fsm.currentSate;
     }
 

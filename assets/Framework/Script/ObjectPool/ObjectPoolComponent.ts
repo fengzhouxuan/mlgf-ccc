@@ -32,7 +32,7 @@ export class ObjectPoolComponent extends MlComponent {
         return this._objectPools.get(name);
     }
 
-    public createObjectPool<T extends PoolObjectBase>(name:string,autoRelaseInterval:number,expireTime:number,capacity:number):ObjectPool<T>{
+    public createObjectPool<T extends PoolObjectBase>(name:string,autoReleaseInterval:number,expireTime:number,capacity:number):ObjectPool<T>{
         if(!name){
            console.error("创建对象池的名称不能为空");
            return;
@@ -41,7 +41,7 @@ export class ObjectPoolComponent extends MlComponent {
             console.error(`对象池${name}已存在`);
             return;
         }
-        let pool = new ObjectPool<T>(name,autoRelaseInterval,expireTime,capacity);
+        let pool = new ObjectPool<T>(name,autoReleaseInterval,expireTime,capacity);
         this._objectPools.set(name,pool);
         return pool;
     }

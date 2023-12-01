@@ -1,7 +1,7 @@
 import { _decorator } from "cc";
 import { ProcedureHelper } from "../../../Framework/Script/Procedure/ProcedureHelper";
 import { Constructor } from "../../../Framework/Script/Base/MlEntry";
-import { ProcedureBase } from "../../../Framework/Script/Procedure/Procedurease";
+import { ProcedureBase } from "../../../Framework/Script/Procedure/ProcedureBase";
 import { GameProcedureInit } from "./GameProcedureInit";
 import { GameProcedureDownLoadPackge } from "./GameProcedureDownLoadPackge";
 import { GameProcedurePreload } from "./GameProcedurePreload";

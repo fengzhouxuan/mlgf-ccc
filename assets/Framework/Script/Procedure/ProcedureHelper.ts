@@ -1,6 +1,6 @@
 import { _decorator, CCString, Component, Node } from 'cc';
 import { Constructor } from '../Base/MlEntry';
-import { ProcedureBase } from './Procedurease';
+import { ProcedureBase } from './ProcedureBase';
 const { ccclass, property } = _decorator;
 
 @ccclass('ProcedureHelper')

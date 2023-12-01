@@ -32,16 +32,16 @@ export class UI3dTracker extends Component{
             return;
         }
         const wpos = this.d3Target.worldPosition;
-        const camerawPos = this.d3Camera.node.worldPosition;
+        const cameraPos = this.d3Camera.node.worldPosition;
         // @ts-ignore
-        if (!this.d3Camera!._camera || (this._lastWPos.equals(wpos) && this._lastCameraPos.equals(camerawPos))) {
+        if (!this.d3Camera!._camera || (this._lastWPos.equals(wpos) && this._lastCameraPos.equals(cameraPos))) {
             if(!force){
                 return;
             }
         }
 
         this._lastWPos.set(wpos);
-        this._lastCameraPos.set(camerawPos);
+        this._lastCameraPos.set(cameraPos);
         const camera = this.d3Camera!;
         // [HACK]
         // @ts-ignore

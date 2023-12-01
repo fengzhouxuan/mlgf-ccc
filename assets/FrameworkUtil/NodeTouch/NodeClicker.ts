@@ -6,14 +6,14 @@ const { ccclass, property } = _decorator;
 export class NodeClicker extends Component {
     private _ray: geometry.Ray = new geometry.Ray();
     private _touchId: number = null;
-    private _mainCamea:Camera=null;
+    private _mainCamera:Camera=null;
 
     get mainCamera():Camera{
-        return this._mainCamea ||null;
+        return this._mainCamera ||null;
     }
 
     public set mainCamera(v: Camera) {
-        this._mainCamea = v;
+        this._mainCamera = v;
     }
     protected onLoad(): void {
         input.on(Input.EventType.TOUCH_START, this.onTouchStart, this);

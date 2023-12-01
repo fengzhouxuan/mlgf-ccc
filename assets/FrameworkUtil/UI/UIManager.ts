@@ -17,7 +17,7 @@ export interface UIConfig {
 }
 
 export interface DialogData {
-    uiformId: number;
+    uiFormId: number;
     userData: object;
 }
 
@@ -43,11 +43,11 @@ export class UIManager {
 
     public static CloseUIForm(uiFormId:number,userData?:object){
         let uiConfig = UIConfigData[uiFormId];
-        let uiform = GameEntry.ui.getUIFormWithAssetName(uiConfig.assetName);
-        if (!uiform) {
+        let uiForm = GameEntry.ui.getUIFormWithAssetName(uiConfig.assetName);
+        if (!uiForm) {
             return;
         }
-        GameEntry.ui.closeUIForm(uiform);
+        GameEntry.ui.closeUIForm(uiForm);
     }
 
     public static CloseGameUIFormBySerId(serId: number, userData?: object) {
@@ -72,7 +72,7 @@ export class UIManager {
     }
 
     private static _dialogs: DialogData[] = [];
-    private static _curDialogSerid = 0;
+    private static _curDialogSerId = 0;
     private static _curDialog:UIFormLogic;
     private static _paused=false;
     static init() {
@@ -104,11 +104,11 @@ export class UIManager {
     }
 
     private static tryShowDialog() {
-        if (this._curDialogSerid != 0) {
-            let isLoading = GameEntry.ui.isLoadingUIForm(this._curDialogSerid);
-            let form = GameEntry.ui.getUIForm(this._curDialogSerid);
+        if (this._curDialogSerId != 0) {
+            let isLoading = GameEntry.ui.isLoadingUIForm(this._curDialogSerId);
+            let form = GameEntry.ui.getUIForm(this._curDialogSerId);
             if(!isLoading && !form){
-                this._curDialogSerid=0;
+                this._curDialogSerId=0;
             }else{
                 return;
             }
@@ -117,24 +117,24 @@ export class UIManager {
             return;
         }
         let dialog = this._dialogs.shift();
-        this._curDialogSerid = this.OpenGameUIForm(dialog.uiformId, dialog.userData);
+        this._curDialogSerId = this.OpenGameUIForm(dialog.uiFormId, dialog.userData);
     }
 
     private static onCloseUIForm(sender: object, args: CloseUIFormCompleteEventArgs) {
         if (!args) {
             return;
         }
-        if (args.serialId != this._curDialogSerid) {
+        if (args.serialId != this._curDialogSerId) {
             return;
         }
-        this._curDialogSerid = 0;
+        this._curDialogSerId = 0;
     }
 
     private static onOpenUIForm(sender:object,args:OpenUIFormSuccessEventArgs){
         if (!args) {
             return;
         }
-        if (args.uiForm.serialId != this._curDialogSerid) {
+        if (args.uiForm.serialId != this._curDialogSerId) {
             return;
         }
         this._curDialog = args.uiForm.uiFormLogic;

@@ -23,7 +23,7 @@ export class AudioComponent extends MlComponent {
     private _musicPaused = false;
     private _musicVolume = 1;
     private _volumeScale=1;
-    private _serlId = 0;
+    private _serId = 0;
     private _loadAudioInfoReference: ReferenceCollection;
     private _helper:AudioHelper;
     public get musicVolume() {
@@ -42,7 +42,7 @@ export class AudioComponent extends MlComponent {
 
     protected start(): void {
         this._resourceComponent = MlEntry.getComponent(ResourceComponent);
-        this._loadAudioInfoReference = ReferencePool.create(LoadAudioInfo.CustoemUniName);
+        this._loadAudioInfoReference = ReferencePool.create(LoadAudioInfo.CustomUniName);
     }
 
     public playMusic(bundleName: string, assetName: string,volume:number=1) {
@@ -57,7 +57,7 @@ export class AudioComponent extends MlComponent {
     }
 
     public playEffect(bundleName: string, assetName: string,volume:number=1):number{
-        let seralId = ++ this._serlId;
+        let seralId = ++ this._serId;
         let loadAudioInfo = this._loadAudioInfoReference.acquire(LoadAudioInfo).init(seralId, assetName,volume*this._volumeScale,false);
         this._resourceComponent.LoadResInBundle(bundleName, assetName, AudioClip, null, null, this.loadAssetCompleteCallback.bind(this), loadAudioInfo);
         return seralId;

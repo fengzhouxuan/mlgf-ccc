@@ -83,7 +83,7 @@ export class WxPlatformHelper extends PlatformHelper {
 
   }
 
-  loadPackge(name: string, success: Function, fail: Function, progress: Function) {
+  loadPackage(name: string, success: Function, fail: Function, progress: Function) {
     const loadTask = wx.loadSubpackage({
       name: name, // name 可以填 name 或者 root
       success: function (res) {
@@ -147,7 +147,7 @@ export class WxPlatformHelper extends PlatformHelper {
   private _shared=false;
   private _shareCallback:Function=null;
   private _shareBeginDate=0;
-  shareTmplate(callback:Function){
+  shareTemplate(callback:Function){
     let index = math.randomRangeInt(0,this._shareTemplates.length);
     this.share(null,this._shareTemplates[index].imageUrlId,this._shareTemplates[index].imageUrl);
     this._shareCallback = callback;
