@@ -36,10 +36,19 @@ export class Fsm<T>{
         return this._owner;
     }
     
-    public get currentSate() : FsmState<T> {
+    public get currentState() : FsmState<T> {
         return this._currentState;
     }
-    
+
+    public get currentStateCtor(): Constructor<FsmState<T>>{
+        for (const [key, value] of this._states) {
+            if(value==this.currentState){
+             return key;
+            }
+         }
+         return null;
+    }
+
     public get currentStateTime():number{
         return this._currentStateTime;
     }
@@ -135,8 +144,8 @@ export class Fsm<T>{
     }
 
     public shutdown(){
-        if(this.currentSate){
-            this.currentSate.onLeave(this,true);
+        if(this.currentState){
+            this.currentState.onLeave(this,true);
         }
         for (const [key, value] of this._states) {
             value.onDestroy(this);

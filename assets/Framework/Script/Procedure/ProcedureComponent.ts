@@ -19,7 +19,7 @@ export class ProcedureComponent extends MlComponent {
 
     
     public get currentProcedure() : ProcedureBase {
-        return this._fsm.currentSate;
+        return this._fsm.currentState;
     }
 
     public get currentProcedureTime() : number {

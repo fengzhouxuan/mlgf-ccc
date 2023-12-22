@@ -3,7 +3,6 @@ import { PoolObjectBase } from "./PoolObjectBase";
 import { ObjectPoolBase } from "./ObjectPoolBase";
 import { ReferenceCollection } from "../ReferencePool/ReferenceCollection";
 import { ReferencePool } from "../ReferencePool/ReferencePool";
-declare type Constructor<T = unknown> = new (...args: any[]) => T;
 
 export class ObjectPool<T extends PoolObjectBase> extends ObjectPoolBase{
     private _objects:Array<PoolObject<T>>;
@@ -27,10 +26,6 @@ export class ObjectPool<T extends PoolObjectBase> extends ObjectPoolBase{
         this._cachedCanReleaseObjects.length =0;
     }
     
-    // public get ObjectType(): string {
-    //     return (typeof T).constructor.name;
-    // }
-
     public get count() : number {
         return this._objects.length;
     }
