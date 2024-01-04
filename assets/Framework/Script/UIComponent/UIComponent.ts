@@ -17,14 +17,18 @@ import { StringUtils } from "../Utils/StringUtils";
 import { UIGroupHelper } from "./UIGroupHelper";
 import { LoadUIFormInfo } from "./LoadUIFormInfo";
 import { UIGroupCreateInfo } from "./UIGroupCreateInfo";
+import { LoadUIPopFormInfo } from "./LoadUIPopFormInfo";
 const { ccclass, property} = _decorator;
 
 @ccclass('UIComponent')
 export class UIComponent extends MlComponent{
     private _uiGroups: Map<string, UIGroup> = new Map<string, UIGroup>;
-    private _uiFormBeingLoaded: Map<number, string> = new Map<number, string>;
+    private _uiFormsLoading: Map<number, string> = new Map<number, string>;
     private _uiFormsToReleaseLoad:Set<number> =new Set<number>;
     private _recycleQueue:UIForm[]=[];
+    private _curShowingPopForm:LoadUIFormInfo=null;
+    private _popFormShowQueue:LoadUIPopFormInfo[]=[];
+
     private _resourceComponent: ResourceComponent = null;
     private _objectPoolComponent: ObjectPoolComponent = null;
     private _eventComponent: EventComponent = null;
@@ -244,18 +248,18 @@ export class UIComponent extends MlComponent{
     }
     public getAllLoadingUIFromSerialIds():number[]{
         let results:number[]=[];
-        for (const [key, value] of this._uiFormBeingLoaded) {
+        for (const [key, value] of this._uiFormsLoading) {
             results.push(key);
         }
         return results;
     }
 
     public isLoadingUIForm(serialId:number):boolean{
-        return this._uiFormBeingLoaded.has(serialId);
+        return this._uiFormsLoading.has(serialId);
     }
 
     public isLoadingUIFormWithAssetName(assetName:string):boolean{
-        for (const [key, value] of this._uiFormBeingLoaded) {
+        for (const [key, value] of this._uiFormsLoading) {
             if(value==assetName){
                 return true;
             }
@@ -268,6 +272,16 @@ export class UIComponent extends MlComponent{
             return false;
         }
         return this.hasUIForm(uiForm.serialId);
+    }
+
+    public pushPopForm(bundleName: string, assetName: string, groupName: string,userData:object){
+        let serialId = ++this._serialId;
+        let popFormLoadInfo = LoadUIPopFormInfo.create(serialId,bundleName,assetName,groupName,true,userData);
+        this._popFormShowQueue.push(popFormLoadInfo);
+    }
+
+    private removePopForm(serialId:number){
+        
     }
 
     public openUIForm(bundleName: string, assetName: string, groupName: string, pauseCoveredUIForm:boolean,userData:object):number{
@@ -290,9 +304,13 @@ export class UIComponent extends MlComponent{
             return;
         }
         let serialId = ++this._serialId;
+        return this.openUIFormWithSerialId(serialId,bundleName,assetName,uiGroup,pauseCoveredUIForm,userData);
+    }
+
+    private openUIFormWithSerialId(serialId:number,bundleName: string, assetName: string, uiGroup: UIGroup, pauseCoveredUIForm:boolean,userData:object):number{
         let uiFormInstanceObject = this._instancePool.spawn(assetName);
         if(!uiFormInstanceObject){
-            this._uiFormBeingLoaded.set(serialId,assetName);
+            this._uiFormsLoading.set(serialId,assetName);
             let loadUIFormInfo = this._loadUIFormReferencePool.acquire(LoadUIFormInfo).initialize(serialId,assetName,uiGroup,pauseCoveredUIForm,userData);
             this._resourceComponent.LoadResInBundle(bundleName, assetName, Prefab, null, this.loadAssetProgressCallback.bind(this), this.loadAssetCompleteCallback.bind(this),loadUIFormInfo);
         }else{
@@ -304,7 +322,7 @@ export class UIComponent extends MlComponent{
     public closeUIFormBySerialId(serialId:number,userData:object){
         if(this.isLoadingUIForm(serialId)){
             this._uiFormsToReleaseLoad.add(serialId);
-            this._uiFormBeingLoaded.delete(serialId);
+            this._uiFormsLoading.delete(serialId);
             return;
         }
         let uiForm = this.getUIForm(serialId);
@@ -346,10 +364,10 @@ export class UIComponent extends MlComponent{
     }
 
     public closeAllLoadingUIForms(){
-        for (const [key, value] of this._uiFormBeingLoaded) {
+        for (const [key, value] of this._uiFormsLoading) {
             this._uiFormsToReleaseLoad.add(key);
         }
-        this._uiFormBeingLoaded.clear();
+        this._uiFormsLoading.clear();
     }
 
     public refocusUIForm(uiForm:UIForm,userData?:object){
@@ -378,7 +396,7 @@ export class UIComponent extends MlComponent{
                 this._uiFormsToReleaseLoad.delete(loadUIFormInfo.serialId);
                 return;
             }
-            this._uiFormBeingLoaded.delete(loadUIFormInfo.serialId);
+            this._uiFormsLoading.delete(loadUIFormInfo.serialId);
             return;
         }
 
@@ -389,7 +407,7 @@ export class UIComponent extends MlComponent{
             return;
         }
 
-        this._uiFormBeingLoaded.delete(loadUIFormInfo.serialId);
+        this._uiFormsLoading.delete(loadUIFormInfo.serialId);
         let uiFormAssetName = loadUIFormInfo.uiFormAssetName;
         let uiFormInstanceObject = this._uiFormInstanceReferencePool.acquire(UIFormInstanceObject).initialize(uiFormAssetName,uiFormAsset,this._uiFormHelper.instantiateUIForm(uiFormAsset),this._uiFormHelper);
         this._instancePool.register(uiFormInstanceObject,true);
