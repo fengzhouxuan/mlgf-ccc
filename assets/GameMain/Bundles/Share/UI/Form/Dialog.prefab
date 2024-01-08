@@ -1,7 +1,7 @@
 [
   {
     "__type__": "cc.Prefab",
-    "_name": "GameForm",
+    "_name": "Dialog",
     "_objFlags": 0,
     "_native": "",
     "data": {
@@ -12,7 +12,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "GameForm",
+    "_name": "Dialog",
     "_objFlags": 0,
     "__editorExtras__": {},
     "_parent": null,
@@ -98,7 +98,7 @@
     "_lpos": {
       "__type__": "cc.Vec3",
       "x": 0,
-      "y": 578.817,
+      "y": 133.60400000000004,
       "z": 0
     },
     "_lrot": {
@@ -221,7 +221,7 @@
       "b": 255,
       "a": 255
     },
-    "_string": "主页",
+    "_string": "弹窗",
     "_horizontalAlign": 1,
     "_verticalAlign": 1,
     "_actualFontSize": 36,
@@ -234,7 +234,7 @@
     "_isSystemFontUsed": true,
     "_spacingX": 0,
     "_isItalic": false,
-    "_isBold": false,
+    "_isBold": true,
     "_isUnderline": false,
     "_underlineHeight": 2,
     "_cacheMode": 0,
@@ -299,7 +299,7 @@
     "_target": null,
     "_left": 0,
     "_right": 0,
-    "_top": 38.18299999999999,
+    "_top": 483.39599999999996,
     "_bottom": 0,
     "_horizontalCenter": 0,
     "_verticalCenter": 0,
@@ -357,7 +357,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "PopForm",
+    "_name": "Close",
     "_objFlags": 0,
     "_parent": {
       "__id__": 1
@@ -384,8 +384,8 @@
     },
     "_lpos": {
       "__type__": "cc.Vec3",
-      "x": 272.763,
-      "y": 168.854,
+      "x": 0,
+      "y": -382.254,
       "z": 0
     },
     "_lrot": {
@@ -485,7 +485,7 @@
   },
   {
     "__type__": "cc.CompPrefabInfo",
-    "fileId": "bfrANdmvFHk542/ovNON7b"
+    "fileId": "6cmpRZrQhBnrfY9YitKIQ3"
   },
   {
     "__type__": "cc.Label",
@@ -508,7 +508,7 @@
       "b": 0,
       "a": 255
     },
-    "_string": "弹窗管理",
+    "_string": "关闭",
     "_horizontalAlign": 1,
     "_verticalAlign": 1,
     "_actualFontSize": 20,
@@ -529,7 +529,7 @@
   },
   {
     "__type__": "cc.CompPrefabInfo",
-    "fileId": "3cLR7ysHxBSKPJaUBeKjlw"
+    "fileId": "54MGx6tG5OE6OAXIYvYRTf"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -539,7 +539,7 @@
     "asset": {
       "__id__": 0
     },
-    "fileId": "c8Zo/aoYVLrLALgT0bpuq9",
+    "fileId": "981J/3YK9Lm6mLlo1n9WmS",
     "instance": null,
     "targetOverrides": null,
     "nestedPrefabInstanceRoots": null
@@ -569,7 +569,7 @@
   },
   {
     "__type__": "cc.CompPrefabInfo",
-    "fileId": "e6yiNtzdtA8LddECbCZKBw"
+    "fileId": "97O9tACfpOmK5FFadXlrTG"
   },
   {
     "__type__": "cc.Sprite",
@@ -613,7 +613,7 @@
   },
   {
     "__type__": "cc.CompPrefabInfo",
-    "fileId": "d4pjqm+CZCxoMVVcF3aFo/"
+    "fileId": "0dK/Qo3X9Cub5Ks51SC71H"
   },
   {
     "__type__": "cc.Button",
@@ -682,7 +682,7 @@
   },
   {
     "__type__": "cc.CompPrefabInfo",
-    "fileId": "43nVmKMpRPboY3kpVuXdQA"
+    "fileId": "01Jt5xl/JDIrAN5NM0X57g"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -692,7 +692,7 @@
     "asset": {
       "__id__": 0
     },
-    "fileId": "916T6A78lN5qaUgxj8DLGC",
+    "fileId": "fa4WcyF+dBSbWnfrt/hA7a",
     "instance": null,
     "targetOverrides": null,
     "nestedPrefabInstanceRoots": null
@@ -760,7 +760,7 @@
     "fileId": "8cjk3ztYlLT700OxQ6d+aJ"
   },
   {
-    "__type__": "407b8qpX3JGpIJMcWGt55d7",
+    "__type__": "71718HF+QRHm6zSLCPLTOyd",
     "_name": "",
     "_objFlags": 0,
     "node": {
@@ -774,7 +774,7 @@
   },
   {
     "__type__": "cc.CompPrefabInfo",
-    "fileId": "a3fHrJ56lFtYl06WPLEvbq"
+    "fileId": "56Bd9bXyZITatrQfkQ/69k"
   },
   {
     "__type__": "cc.PrefabInfo",

@@ -96,7 +96,6 @@ export class GameEntry extends Component {
         this.initManager();
 
         CCCTimer.init();
-        UIManager.init();
         // this.node.addComponent(NodeClicker);
         // GameEntry.platform.setFrameRate(30);
         GameEntry.platform.onAudioInterruptionEnd(() => {
@@ -112,7 +111,6 @@ export class GameEntry extends Component {
     protected update(dt: number): void {
 
         TimeLine.update(dt);
-        UIManager.update(dt);
     }
     
 }

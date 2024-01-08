@@ -1,5 +1,6 @@
 import { IReference } from "../ReferencePool/IReference";
 import { ReferencePool } from "../ReferencePool/ReferencePool";
+import { UIGroup } from "./UIGroup";
 
 export class LoadUIPopFormInfo implements IReference{
     public static CustomUnitName: string = "LoadUIPopFormInfo";
@@ -11,22 +12,19 @@ export class LoadUIPopFormInfo implements IReference{
     private _pauseCoveredUIForm: boolean;
     private _uiFormBundleName:string;
     private _uiFormAssetName:string;
-    private _uiGroundName:string;
+    private _uiGroupName:string;
+    private _uiGroup:UIGroup;
     private _userData: object = null;
     
     constructor(){
-        this._serialId = 0;
-        this._uiFormBundleName=null;
-        this._pauseCoveredUIForm = false;
-        this._uiGroundName=null;
-        this._uiFormAssetName=null;
-        this._userData = null;
+        this.clear();
     }
     clear() {
         this._serialId = 0;
         this._uiFormBundleName=null;
         this._pauseCoveredUIForm = false;
-        this._uiGroundName=null;
+        this._uiGroupName=null;
+        this._uiGroup=null;
         this._uiFormAssetName=null;
         this._userData = null;
     }
@@ -48,11 +46,20 @@ export class LoadUIPopFormInfo implements IReference{
     }
     
     public get uiGroundName() : string {
-        return this._uiGroundName;
+        return this._uiGroupName;
     }
 
     public set uiGroundName(v : string) {
-        this._uiGroundName = v;
+        this._uiGroupName = v;
+    }
+
+    
+    public get uiGroup() : UIGroup {
+        return this._uiGroup;
+    }
+    
+    public set uiGroup(v : UIGroup) {
+        this._uiGroup = v;
     }
     
     public get uiFormAssetName() : string {
@@ -63,11 +70,12 @@ export class LoadUIPopFormInfo implements IReference{
         return this._userData;
     }
 
-    public static create(serialId:number,bundleName:string,assetName:string, uiGroundName:string,pauseCoveredUIForm:boolean,userData:object):LoadUIPopFormInfo{
+    public static create(serialId:number,bundleName:string,assetName:string, uiGroundName:string,uiGroup:UIGroup,pauseCoveredUIForm:boolean,userData:object):LoadUIPopFormInfo{
         let info = ReferencePool.acquire(LoadUIPopFormInfo.CustomUnitName,LoadUIPopFormInfo);
         info._serialId = serialId;
         info._uiFormBundleName = bundleName;
-        info._uiGroundName = uiGroundName;
+        info._uiGroupName = uiGroundName;
+        info._uiGroup = uiGroup;
         info._pauseCoveredUIForm = pauseCoveredUIForm;
         info._uiFormAssetName = assetName;
         info._userData = userData;
