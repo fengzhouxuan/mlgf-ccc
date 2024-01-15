@@ -32,4 +32,10 @@ export class PlatformHelper{
     share(title?:string,imageUrlId?:string,imageUrl?:string){}
     vibrateShort(){}
     vibrateShortMedium(){}
+    getUserInfo(complete:Function){
+    }
+}
+
+export class PlatformUserInfo{
+    
 }

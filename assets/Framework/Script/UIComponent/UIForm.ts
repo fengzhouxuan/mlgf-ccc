@@ -100,6 +100,7 @@ export class UIForm extends Component {
 
     public onDepthChanged(uiGroupDepth:number,depthInUIGroup:number){
         this._depthInUIGroup = depthInUIGroup;
+        this.node.setSiblingIndex(depthInUIGroup-1);
         this._uiFormLogic.onDepthChanged(uiGroupDepth,depthInUIGroup);
     }
 }
