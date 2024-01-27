@@ -301,6 +301,9 @@ export class UIComponent extends MlComponent {
     private closePopForm(serialId: number, userData: object) {
         //弹出框
         //重置顶层弹出窗
+        if (!this._curShowingPopForm){
+            return;
+        }
         if (this._curShowingPopForm.serialId == serialId) {
             ReferencePool.release(this._curShowingPopForm);
             this._curShowingPopForm = null;
