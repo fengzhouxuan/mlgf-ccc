@@ -1,52 +1,93 @@
-import { _decorator, AssetManager, assetManager, Component, Node, Sprite, SpriteFrame } from 'cc';
-const { ccclass, property } = _decorator;
+import { _decorator, AssetManager, assetManager, Sprite, SpriteFrame } from 'cc';
+import { StringUtils } from '../Utils/StringUtils';
+import { ImageLoader } from '../ResourceComponent/ImageLoader';
+const { ccclass } = _decorator;
 
 @ccclass('AutoReleaseSprite')
 export class AutoReleaseSprite extends Sprite {
-    private _loadedSpfs:SpriteFrame[]=[];
-    private _curLoadingSpdName="";
-    load(bundleName:string,assetName:string){
-        let self =this;
-        let loadingAssetSerialName = `${bundleName}+${assetName}`;
-        this._curLoadingSpdName = loadingAssetSerialName;
-        assetManager.loadBundle(bundleName,(err:Error,Bundle:AssetManager.Bundle)=>{
-            if(err){
-                return;
-            }
-            Bundle.load(assetName,(err:Error,spf:SpriteFrame)=>{
-                if(err){
-                    return;
-                }
-                let loadingAssetSerialName = `${bundleName}+${assetName}`;
-                if(!this || !this.isValid || self._curLoadingSpdName!=loadingAssetSerialName){
-                    spf.addRef();
-                    spf.decRef();
-                }else{
-                    self._loadedSpfs.push(spf);
-                    spf.addRef();
-                    self.spriteFrame = spf;
-                }
-                // console.log(`引用计数：${spf.refCount}`);
-                // console.log(bundleName+"-"+assetName);
-            });
-        });
-    }
+  private _curLoadingUrl = "";
 
-    release(){
-        for (let i = 0; i < this._loadedSpfs.length; i++) {
-            let spf = this._loadedSpfs[i];
-            if(!spf){
-                continue;
-            }
-            spf.decRef();
-            spf=null;
+  private _lastSpf: SpriteFrame;
+  private _curLoadedSpf: SpriteFrame;
+  onLoad(): void {
+    super.onLoad();
+  }
+
+  load(bundleName: string, assetName: string) {
+    let self = this;
+    let loadingAssetSerialName = `${bundleName}+${assetName}`;
+    this._curLoadingUrl = loadingAssetSerialName;
+    assetManager.loadBundle(bundleName, (err: Error, Bundle: AssetManager.Bundle) => {
+      if (err) {
+        return;
+      }
+      Bundle.load(assetName, (err: Error, spf: SpriteFrame) => {
+        if (err) {
+          return;
         }
-        this._loadedSpfs.length=0;
-    }
+        let loadingAssetSerialName = `${bundleName}+${assetName}`;
+        if (!this || !this.isValid || self._curLoadingUrl != loadingAssetSerialName) {
+          spf.addRef();
+          spf.decRef();
+          return;
+        }
+        if (this._lastSpf) {
+          if (ImageLoader.isRemoteAsset(this._lastSpf)) {
+            ImageLoader.release(this._lastSpf);
+          } else {
+            this._lastSpf.decRef();
+          }
+        }
+        spf.addRef();
+        self.spriteFrame = spf;
+        self._curLoadedSpf = spf;
+        this._lastSpf = spf;
 
-    onDestroy(): void {
-     super.onDestroy();
-        this.release();
+      });
+    });
+  }
+
+  loadRemote(url: string) {
+    if (StringUtils.IsNullOrEmpty(url)) {
+      return;
     }
+    let self = this;
+    this._curLoadingUrl = url;
+    ImageLoader.loadRemote(url, ".png", (spriteFrame: SpriteFrame) => {
+      if (!this || !this.isValid || self._curLoadingUrl != url) {
+        ImageLoader.release(spriteFrame);
+        return;
+      }
+      if (this._lastSpf) {
+        if (ImageLoader.isRemoteAsset(this._lastSpf)) {
+          ImageLoader.release(this._lastSpf);
+        } else {
+          this._lastSpf.decRef();
+        }
+      }
+      self.spriteFrame = spriteFrame;
+      self._curLoadedSpf = spriteFrame;
+      this._lastSpf = spriteFrame;
+    });
+  }
+
+  release() {
+    if (!this._curLoadedSpf) {
+      return;
+    }
+    // let spf =this.spriteFrame;
+    if (ImageLoader.isRemoteAsset(this._curLoadedSpf)) {
+      ImageLoader.release(this._curLoadedSpf);
+    } else {
+      this._curLoadedSpf.decRef();
+    }
+    // this.spriteFrame = this._originalSpf;
+    this._lastSpf = null;
+  }
+
+  onDestroy(): void {
+    // this.spriteFrame  = this._originalSpf;
+    super.onDestroy();
+    this.release();
+  }
 }
-
