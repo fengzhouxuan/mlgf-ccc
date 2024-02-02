@@ -4,7 +4,10 @@ import { Entity } from "./Entity";
 
 export class EntityHelper{
     public instantiateEntity(entityAsset: object): object{
-        return instantiate(entityAsset as Prefab);
+        let prefab = entityAsset as Prefab;
+        prefab.addRef();
+        let ins = instantiate(prefab);
+        return ins;
     }
 
     public createEntity(entityInstance:object,entityGroup:EntityGroup,userData:object):Entity{
@@ -18,6 +21,8 @@ export class EntityHelper{
     }
 
     public releaseEntity(entityAsset:object,entityNode:object){
+        let prefab = entityAsset as Prefab;
+        prefab.decRef();
         let node = entityNode as Node;
         node?.destroy();
     }

@@ -1,10 +1,13 @@
-import { Node, instantiate } from "cc";
+import { Node, Prefab, instantiate } from "cc";
 import { UIGroup } from "./UIGroup";
 import { UIForm } from "./UIForm";
 
 export class UIFormHelper {
     public instantiateUIForm(uiFormAsset: object): object {
-        return instantiate(uiFormAsset);
+        let prefab = uiFormAsset as Prefab;
+        prefab.addRef();
+        let ins = instantiate(prefab);
+        return ins;
     }
 
     public createUIForm(uiFormInstance: object, uiGroup: UIGroup, userData: object): UIForm {
@@ -18,6 +21,8 @@ export class UIFormHelper {
     }
 
     public releaseUIForm(uiFormAsset: object, uiFormInstance: object) {
+        let prefab = uiFormAsset as Prefab;
+        prefab.decRef();
         let node: Node = uiFormInstance as Node;
         node?.destroy();
     }
