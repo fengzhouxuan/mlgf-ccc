@@ -54,24 +54,7 @@ export class UIManager {
         GameEntry.ui.closeUIFormBySerialId(serId, userData);
     }
 
-    public static LoadSpf(name: string, sprite: Sprite) {
-        GameEntry.res.LoadResInBundle("Share", AssetUtil.getSpfName(name), SpriteFrame, null, null, (err, spf: SpriteFrame, userData) => {
-            if (!err) {
-                let sp = userData as Sprite;
-                sp.spriteFrame = spf;
-            }
-        }, sprite);
-    }
-    public static LoadSpfWithBundle(bundleName: string, name: string, sprite: Sprite) {
-        GameEntry.res.LoadResInBundle(bundleName, AssetUtil.getSpfName(name), SpriteFrame, null, null, (err, spf: SpriteFrame, userData) => {
-            if (!err) {
-                let sp = userData as Sprite;
-                sp.spriteFrame = spf;
-            }
-        }, sprite);
-    }
-
-    public static pushDialog(uiFormId:number,userData: object){
+    public static pushDialog(uiFormId:number,userData?: object){
         let uiConfig = UIConfigData[uiFormId];
         GameEntry.ui.pushPopForm(uiConfig.bundleName, uiConfig.assetName, uiConfig.group, userData);
     }

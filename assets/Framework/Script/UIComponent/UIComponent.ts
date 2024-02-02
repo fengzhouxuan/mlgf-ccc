@@ -28,6 +28,7 @@ export class UIComponent extends MlComponent {
     private _recycleQueue: UIForm[] = [];
     private _curShowingPopForm: LoadUIPopFormInfo = null;
     private _popFormShowQueue: LoadUIPopFormInfo[] = [];
+    private _uiFormsLoadingBeforePop: Set<number> = new Set<number>;
 
     private _resourceComponent: ResourceComponent = null;
     private _objectPoolComponent: ObjectPoolComponent = null;
@@ -291,8 +292,17 @@ export class UIComponent extends MlComponent {
         if(this._popFormShowQueue.length==0){
             return;
         }
+        if(this._uiFormsLoading.size>0){
+            for (const [key, value] of this._uiFormsLoading) {
+                this._uiFormsLoadingBeforePop.add(key);
+            }
+            return;
+        }
+        if(this._uiFormsLoadingBeforePop.size>0){
+            return;
+        }
         if(!this._curShowingPopForm){
-            let popForm = this._popFormShowQueue.shift();
+            let popForm =  this._popFormShowQueue.shift();
             this.openUIFormWithSerialId(popForm.serialId,popForm.uiFormBundleName,popForm.uiFormAssetName,popForm.uiGroup,popForm.pauseCoveredUIForm,popForm.userData);
             this._curShowingPopForm = popForm;
         }
@@ -301,28 +311,23 @@ export class UIComponent extends MlComponent {
     private closePopForm(serialId: number, userData: object) {
         //弹出框
         //重置顶层弹出窗
+        if(this._uiFormsLoadingBeforePop.has(serialId)){
+            this._uiFormsLoadingBeforePop.delete(serialId);
+        }
         if (!this._curShowingPopForm){
             return;
         }
         if (this._curShowingPopForm.serialId == serialId) {
-            ReferencePool.release(this._curShowingPopForm);
             this._curShowingPopForm = null;
         }
         let popFormSerIdInQueue = this._popFormShowQueue.findIndex(e => e.serialId == serialId)
         if (popFormSerIdInQueue >= 0) {
-            ReferencePool.release(this._popFormShowQueue[popFormSerIdInQueue]);
             this._popFormShowQueue.splice(popFormSerIdInQueue, 1);
         }
     }
 
     private clearPopForm(){
-        if(this._curShowingPopForm){
-            ReferencePool.release(this._curShowingPopForm);
-        }
         this._curShowingPopForm = null;
-        this._popFormShowQueue.forEach(value=>{
-            ReferencePool.release(value);45
-        })
         this._popFormShowQueue.length=0;
     }
 
