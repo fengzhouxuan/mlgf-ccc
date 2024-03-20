@@ -402,7 +402,7 @@ export class EntityComponent extends MlComponent {
             this._entitiesToReleaseOnLoad.delete(loadEntityInfo.serialId);
 
             this._loadEntityInfoReferencePool.release(loadEntityInfo);
-            this._entityHelper.releaseEntity(entityAsset, null);
+            // this._entityHelper.releaseEntity(entityAsset, null);
             return;
         }
         this._entitiesBeingLoaded.delete(loadEntityInfo.entityId);

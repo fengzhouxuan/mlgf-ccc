@@ -455,7 +455,7 @@ export class UIComponent extends MlComponent {
         if (this._uiFormsCancelLoading.has(loadUIFormInfo.serialId)) {
             this._uiFormsCancelLoading.delete(loadUIFormInfo.serialId);
             this._loadUIFormReferencePool.release(loadUIFormInfo);
-            this._uiFormHelper.releaseUIForm(uiFormAsset, null);
+            // this._uiFormHelper.releaseUIForm(uiFormAsset, null);
             return;
         }
 
