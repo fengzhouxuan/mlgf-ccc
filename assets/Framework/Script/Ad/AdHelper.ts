@@ -8,7 +8,7 @@ export abstract class AdHelper{
 
     abstract onInit();
 
-    abstract isVideoReady(autoToast:boolean):boolean;
+    abstract isVideoReady():boolean;
 
     abstract playVideo(onClose:OnAdCloseCallback,scene:string);
 }

@@ -3,6 +3,9 @@ import { AdHelper } from "./AdHelper";
 
 let wx = window["wx"];
 
+import { _decorator } from "cc";
+const { ccclass, property } = _decorator;
+@ccclass('WxAdHelper')
 export class WxAdHelper extends AdHelper {
     private _video = null;
     private _videoLoaded = false;
@@ -40,12 +43,9 @@ export class WxAdHelper extends AdHelper {
         });
     }
 
-    isVideoReady(autoToast:boolean=true): boolean {
+    isVideoReady(): boolean {
         if (!this._videoLoaded) {
             this._video.load();
-            if(autoToast){
-                wx.showToast({ title: "视频未准备好", mask: true, duration: 1000 });
-            }
         }
         return this._videoLoaded;
     }

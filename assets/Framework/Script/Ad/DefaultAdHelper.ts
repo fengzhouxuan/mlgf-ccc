@@ -1,5 +1,7 @@
 import { AdHelper } from "./AdHelper";
-
+import { _decorator } from "cc";
+const { ccclass, property } = _decorator;
+@ccclass('DefaultAdHelper')
 export class DefaultAdHelper extends AdHelper{
     get platformName(): string {
         return "default";

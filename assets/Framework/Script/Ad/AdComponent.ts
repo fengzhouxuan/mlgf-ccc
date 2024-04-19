@@ -25,15 +25,12 @@ export class AdComponent extends MlComponent {
         this._adHelper.init();
     }
 
-    public isVideoReady(autoToast:boolean=false):boolean{
-        let ready = this._adHelper.isVideoReady(autoToast);
+    public isVideoReady():boolean{
+        let ready = this._adHelper.isVideoReady();
         return ready;
     }
 
     public playVideo(onClose:OnAdCloseCallback,scene?:string){
-        if(!this.isVideoReady()){
-            return;
-        }
         this._adHelper.playVideo((code)=>{
             onClose(code);
             let args =RewardVideoClosedEventArgs.create(code,scene);

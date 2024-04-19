@@ -23,6 +23,7 @@ import { UIManager } from '../../../FrameworkUtil/UI/UIManager';
 import { ProcedureComponent } from '../../../Framework/Script/Procedure/ProcedureComponent';
 import { NodeClicker } from '../../../FrameworkUtil/NodeTouch/NodeClicker';
 import { DataAnalysisComponent } from '../../CustomComponent/DataAnalysis/DataAnalysisComponent';
+import { HttpComponent } from '../../../Framework/Script/Http/HttpComponent';
 const { ccclass, property } = _decorator;
 var timeScale = 1;
 
@@ -55,6 +56,7 @@ export class GameEntry extends Component {
     public static setting: SettingComponent;
     public static audio: AudioComponent;
     public static ad: AdComponent;
+    public static http:HttpComponent;
     //自定义
     public static platform: PlatformComponent;
     public static uiEntity: UIEntityComponent;
@@ -86,6 +88,7 @@ export class GameEntry extends Component {
         GameEntry.setting = MlEntry.getComponent(SettingComponent);
         GameEntry.audio = MlEntry.getComponent(AudioComponent);
         GameEntry.ad = MlEntry.getComponent(AdComponent);
+        GameEntry.http = MlEntry.getComponent(HttpComponent);
 
         GameEntry.platform = MlEntry.getComponent(PlatformComponent);
         GameEntry.uiEntity = MlEntry.getComponent(UIEntityComponent);
