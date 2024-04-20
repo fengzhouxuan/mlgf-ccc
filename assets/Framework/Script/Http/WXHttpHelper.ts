@@ -1,6 +1,6 @@
 import { _decorator} from 'cc';
 import { HttpHelper } from './HttpHelper';
-import { WXApiUtils } from '../Env/WXApiUtils';
+import { WXApiUtils } from '../Env/Wx/WXApiUtils';
 import { HttpOption } from './HttpComponent';
 const { ccclass } = _decorator;
 

@@ -14,6 +14,6 @@ export class GameProcedureMainGame extends ProcedureBase{
     }
 
     public onUpdate(fsm: Fsm<ProcedureComponent>, dt: number): void {
-        GameMain.Instance.update(dt);
+        // GameMain.Instance.update(dt);
     }
 }
