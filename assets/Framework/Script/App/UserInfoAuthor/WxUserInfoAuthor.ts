@@ -53,9 +53,6 @@ export class WxUserInfoAuthor extends UserInfoAuthor{
                     );
                 }else{
                     //用户未授权
-                    if(this._cachedButton){
-                        return;
-                    }
                     this._cachedButton = WXApiUtils.createUserInfoButton(left,top,width,height,(res)=>{
                         if (res.errMsg.indexOf(':ok') > -1 && !!res.rawData) {
                             // 同意
