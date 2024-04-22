@@ -39,7 +39,7 @@ export class WxUserInfoAuthor extends UserInfoAuthor{
         WXApiUtils.getSetting(
             (res) => {
                 //成功
-                if(res.authSetting[WxAuthKey.userInfo]){
+                if(res[WxAuthKey.userInfo]){
                     //用户已经授权
                     WXApiUtils.getUserInfo(
                         (res) => {
@@ -54,14 +54,11 @@ export class WxUserInfoAuthor extends UserInfoAuthor{
                 }else{
                     //用户未授权
                     this._cachedButton = WXApiUtils.createUserInfoButton(left,top,width,height,(res)=>{
-                        if (res.errMsg.indexOf(':ok') > -1 && !!res.rawData) {
-                            // 同意
-                            console.log(res);
-                            success && success(res);
-                          } else {
-                            // 拒绝
-                            fail && fail();
-                          }
+                        //成功
+                        success && success(res);
+                    },()=>{
+                        //失败
+                        fail && fail();
                     });
                 }
 

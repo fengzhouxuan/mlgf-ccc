@@ -2,6 +2,8 @@ import { _decorator, Button, Component, Node } from 'cc';
 import { GameFormLogic } from '../../../../Framework/Script/UIComponent/GameFormLogic';
 import { UIManager } from '../../../../FrameworkUtil/UI/UIManager';
 import { UIFormId } from '../UIUtil';
+import { UserInfoAuthButton } from '../../../../FrameworkUtil/UI/Component/UserInfoAuthButton';
+import { UserInfo } from '../../../../Framework/Script/App/AppComponent';
 const { ccclass, property } = _decorator;
 
 @ccclass('GameForm')
@@ -14,6 +16,14 @@ export class GameForm extends GameFormLogic {
     }
     public onOpen(userData: object): void {
         super.onOpen(userData);
+        let auth = this.getComponentInChildren(UserInfoAuthButton);
+        auth.auth(this.onAuthSuccess.bind(this), this.onAuthFail.bind(this));
+    }
+    onAuthFail() {
+        console.log("auth fail");
+    }
+    onAuthSuccess(userInfo:UserInfo) {
+        console.log("auth success:",userInfo);
     }
 
     private onPopFormClick(){

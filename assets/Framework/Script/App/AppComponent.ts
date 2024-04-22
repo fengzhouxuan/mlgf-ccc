@@ -1,15 +1,29 @@
-import { _decorator, Component, Node } from 'cc';
+import { _decorator, Component, EventTarget, Node } from 'cc';
 import MlComponent from '../Base/MlComponent';
 import { UserInfoAuthor } from './UserInfoAuthor/UserInfoAuthor';
 import { BYTEDANCE, WECHAT } from 'cc/env';
 import { WxUserInfoAuthor } from './UserInfoAuthor/WxUserInfoAuthor';
+import { SystemInfoHelper } from './SystemInfo/SystemInfoHelper';
+import { WxSysInfoHelper } from './SystemInfo/WxSystemInfoHelper';
+import { TTUserInfoAuthor } from './UserInfoAuthor/TTUserInfoAuthor';
+import { TTSystemInfoHelper } from './SystemInfo/TTSystemInfoHelper';
+import { DefaultUserInfoAuthor } from './UserInfoAuthor/DefaultUserInfoAuthor';
+import { DefaultSystemInfoHelper } from './SystemInfo/DefaultSystemInfoHelper';
 const { ccclass, property } = _decorator;
 
+export enum AppEventType{
+    OnShow,
+    OnHide,
+}
 @ccclass('AppComponent')
 export class AppComponent extends MlComponent {
+    private _event = new EventTarget();
+    get event(){
+        return this._event;
+    }
     private _cachedUserInfo:UserInfo;
     private _userInfoAuthor:UserInfoAuthor;
-    
+    private _sysHelper:SystemInfoHelper;
     public get cachedUserInfo() : UserInfo {
         return this._cachedUserInfo;
     }
@@ -18,15 +32,38 @@ export class AppComponent extends MlComponent {
         super.onLoad();
         if(WECHAT){
             this._userInfoAuthor = new WxUserInfoAuthor();
+            this._sysHelper = new WxSysInfoHelper();
         }else if(BYTEDANCE){
-
+            this._userInfoAuthor = new TTUserInfoAuthor();
+            this._sysHelper = new TTSystemInfoHelper();
         }else{
-
+            this._userInfoAuthor = new DefaultUserInfoAuthor();
+            this._sysHelper= new DefaultSystemInfoHelper();
         }
-        this._userInfoAuthor.init();
+        this._userInfoAuthor?.init();
+        this._sysHelper?.init();
+
+        this.checkUpdate("更新提示","新版本已经准备好，是否重启应用？");
+        this._sysHelper?.showShareMenu();
+        this._sysHelper?.onShow(res=>{
+            this.internalOnshow(res);
+        });
+
+        this._sysHelper?.onHide(res=>{
+            this.internalOnHide(res);
+        });
     }
+
+    private internalOnshow(res){
+        this._event.emit(AppEventType.OnShow,res);
+    }
+
+    private internalOnHide(res){
+        this._event.emit(AppEventType.OnHide,res);
+    }
+    //#region  用户信息授权
     public isNeedUserButton():boolean{
-        return this._userInfoAuthor.isNeedUserButton();
+        return this._userInfoAuthor?.isNeedUserButton();
     }
     public getUserInfo(option:GetUserInfoOption,success:(userInfo:UserInfo)=>void,fail:()=>void) {
         if(this._cachedUserInfo){
@@ -45,6 +82,19 @@ export class AppComponent extends MlComponent {
     public shutdownGetUserInfo(){
         this._userInfoAuthor?.shutdown();
     }
+    //#endregion
+
+    public getAppScreenSize():{width:number,height:number}{
+        return this._sysHelper?.getScreenSize();
+    }
+
+    public login(success:(info:LoginInfo)=>void,fail:()=>void){
+        this._sysHelper?.login(success,fail);
+    }
+
+    public checkUpdate(title:string,content:string){
+        this._sysHelper?.checkUpdate(title,content);
+    }
 }
 
 export class GetUserInfoOption{
@@ -58,5 +108,10 @@ export class GetUserInfoOption{
 export class UserInfo{
     nickName?:string;
     avatarUrl?:string;
+}
+
+export class LoginInfo{
+    code?:string;           //登录凭证
+    anonymousCode?:string;  //匿名码，用于匿名用户登录
 }
 
