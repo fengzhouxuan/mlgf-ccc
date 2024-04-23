@@ -12,8 +12,9 @@ import { DefaultSystemInfoHelper } from './SystemInfo/DefaultSystemInfoHelper';
 const { ccclass, property } = _decorator;
 
 export enum AppEventType{
-    OnShow,
-    OnHide,
+    OnShow="AppEventType.OnShow",
+    OnHide = "AppEventType.OnHide",
+    OnAudioInterruptionEnd = "AppEventType.OnAudioInterruptionEnd",
 }
 @ccclass('AppComponent')
 export class AppComponent extends MlComponent {
@@ -52,6 +53,9 @@ export class AppComponent extends MlComponent {
         this._sysHelper?.onHide(res=>{
             this.internalOnHide(res);
         });
+        this._sysHelper?.onAudioInterruptionEnd(()=>{
+            this.internalOnAudioInterruptionEnd();
+        });
     }
 
     private internalOnshow(res){
@@ -60,6 +64,10 @@ export class AppComponent extends MlComponent {
 
     private internalOnHide(res){
         this._event.emit(AppEventType.OnHide,res);
+    }
+
+    private internalOnAudioInterruptionEnd() {
+        this._event.emit(AppEventType.OnAudioInterruptionEnd);
     }
     //#region  用户信息授权
     public isNeedUserButton():boolean{
@@ -94,6 +102,16 @@ export class AppComponent extends MlComponent {
 
     public checkUpdate(title:string,content:string){
         this._sysHelper?.checkUpdate(title,content);
+    }
+
+    public vibrateLong() {
+        this._sysHelper?.vibrateLong();
+    }
+    public vibrateShort() {
+        this._sysHelper?.vibrateShort();
+    }
+    public setFrameRate(rate: number) {
+        this._sysHelper?.setFrameRate(rate);
     }
 }
 
