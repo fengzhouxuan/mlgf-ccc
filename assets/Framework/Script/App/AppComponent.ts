@@ -15,10 +15,15 @@ export enum AppEventType{
     OnShow="AppEventType.OnShow",
     OnHide = "AppEventType.OnHide",
     OnAudioInterruptionEnd = "AppEventType.OnAudioInterruptionEnd",
+    OnLogin = "AppEventType.OnLogin",
+    OnAuthUserInfo = "AppEventType.OnAuthUserInfo",
 }
 @ccclass('AppComponent')
 export class AppComponent extends MlComponent {
     private _event = new EventTarget();
+    public static get EventType(){
+        return AppEventType;
+    }
     get event(){
         return this._event;
     }
@@ -83,6 +88,7 @@ export class AppComponent extends MlComponent {
         this._userInfoAuthor?.authorUserInfo(option,(userInfo)=>{
             this._cachedUserInfo = userInfo;
             this.shutdownGetUserInfo();
+            this._event.emit(AppEventType.OnAuthUserInfo,userInfo);
             success && success(userInfo);
         },fail);
     }
@@ -97,7 +103,10 @@ export class AppComponent extends MlComponent {
     }
 
     public login(success:(info:LoginInfo)=>void,fail:()=>void){
-        this._sysHelper?.login(success,fail);
+        this._sysHelper?.login((info:LoginInfo)=>{
+            this._event.emit(AppEventType.OnLogin,info);
+            success && success(info);
+        },fail);
     }
 
     public checkUpdate(title:string,content:string){

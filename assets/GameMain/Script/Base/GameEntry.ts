@@ -25,6 +25,7 @@ import { NodeClicker } from '../../../FrameworkUtil/NodeTouch/NodeClicker';
 import { DataAnalysisComponent } from '../../CustomComponent/DataAnalysis/DataAnalysisComponent';
 import { HttpComponent } from '../../../Framework/Script/Http/HttpComponent';
 import { AppComponent } from '../../../Framework/Script/App/AppComponent';
+import { UserDataComponent } from '../../../Framework/Script/UserData/UserDataComponent';
 const { ccclass, property } = _decorator;
 var timeScale = 1;
 
@@ -62,7 +63,7 @@ export class GameEntry extends Component {
     //自定义
     public static platform: PlatformComponent;
     public static uiEntity: UIEntityComponent;
-    public static user: UserComponent;
+    public static user: UserDataComponent;
     public static dataAnalysis:DataAnalysisComponent;
 
     public static game: GameMain;
@@ -95,7 +96,7 @@ export class GameEntry extends Component {
 
         GameEntry.platform = MlEntry.getComponent(PlatformComponent);
         GameEntry.uiEntity = MlEntry.getComponent(UIEntityComponent);
-        GameEntry.user = MlEntry.getComponent(UserComponent);
+        GameEntry.user = MlEntry.getComponent(UserDataComponent);
         GameEntry.dataAnalysis =MlEntry.getComponent(DataAnalysisComponent);
 
 

@@ -1,9 +1,4 @@
-import { Sprite, SpriteFrame } from "cc";
 import { GameEntry } from "../../GameMain/Script/Base/GameEntry";
-import { AssetUtil } from "../Utils/AssetUtil";
-import { CloseUIFormCompleteEventArgs } from "../../Framework/Script/UIComponent/CloseUIFormCompleteEventArgs";
-import { UIFormLogic } from "../../Framework/Script/UIComponent/UIFormLogic";
-import { OpenUIFormSuccessEventArgs } from "../../Framework/Script/UIComponent/OpenUIFormSuccessEventArgs";
 
 export interface UIConfig {
     /** bundle包名 */

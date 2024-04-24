@@ -1,17 +1,17 @@
-import { AdErrorCode, OnAdCloseCallback } from "./AdComponent";
+import { _decorator} from 'cc';
+import { OnAdCloseCallback, AdErrorCode } from "./AdComponent";
 import { AdHelper } from "./AdHelper";
+const { ccclass } = _decorator;
 
-let wx = window["wx"];
-
-import { _decorator } from "cc";
-const { ccclass, property } = _decorator;
-@ccclass('WxAdHelper')
-export class WxAdHelper extends AdHelper {
+let tt = window["tt"];
+@ccclass('TTAdHelper')
+export class TTAdHelper extends AdHelper {
     private _video = null;
     private _videoLoaded = false;
     private _currentCloseCallback: OnAdCloseCallback = null;
+
     get platformName(): string {
-        return "wx";
+        return "tt";
     }
 
     onInit() {
@@ -20,7 +20,7 @@ export class WxAdHelper extends AdHelper {
 
     initVideo() {
         let adId = this._rewardVideoId;
-        this._video = wx.createRewardedVideoAd({ adUnitId: adId });
+        this._video = tt.createRewardedVideoAd({ adUnitId: adId });
         this._video.onLoad(() => {
             this._videoLoaded = true;
             console.log('激励视频 广告加载成功' + this._videoLoaded);
@@ -50,13 +50,21 @@ export class WxAdHelper extends AdHelper {
         return this._videoLoaded;
     }
     playVideo(onClose: OnAdCloseCallback, scene: string) {
-        if(!this._videoLoaded){
-            return;
-        }
         this._currentCloseCallback = onClose;
         this._videoLoaded=false; 
-        this._video.show();
+        this._video.show()
+        .then(()=>{
+            // console.log("视频广告展示");
+        })
+        .catch((err)=>{
+            // console.log("视频广告展示失败");
+            this._video.load().then(() => {
+                // console.log("手动加载成功");
+                // 加载成功后需要再显示广告
+                this._video.show();
+            });
+        });
 
     }
-
 }
+

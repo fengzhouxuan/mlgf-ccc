@@ -10,7 +10,6 @@ export class GameProcedureMainGame extends ProcedureBase{
     public onEnter(fsm: Fsm<ProcedureComponent>): void {
         SplashLoading.Destroy();
         GameEntry.game = GameMain.Launch();
-
     }
 
     public onUpdate(fsm: Fsm<ProcedureComponent>, dt: number): void {

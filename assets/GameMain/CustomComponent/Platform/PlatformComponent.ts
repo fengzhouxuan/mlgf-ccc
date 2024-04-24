@@ -119,7 +119,7 @@ export class PlatformComponent extends MlComponent {
         if(!userId){
             return;
         }
-        let userData = GameEntry.user.getUserData();
+        let userData = GameEntry.user.data;
         if(!userData){
             fail && fail();
             return;
