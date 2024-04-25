@@ -55,5 +55,9 @@ export class WxSysInfoHelper extends SystemInfoHelper{
     public showShareMenu(){
         WXApiUtils.showShareMenu();
     }
+
+    public triggerGC(){
+        WXApiUtils.triggerGC();
+    }
 }
 

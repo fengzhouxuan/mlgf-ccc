@@ -59,5 +59,9 @@ export class TTSystemInfoHelper extends SystemInfoHelper{
     public showShareMenu(){
         TTApiUtils.showShareMenu();
     }
+
+    public triggerGC(){
+        TTApiUtils.triggerGC();
+    }
 }
 

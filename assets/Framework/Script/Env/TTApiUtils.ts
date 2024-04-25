@@ -46,6 +46,10 @@ export class TTApiUtils {
     tt?.showShareMenu();
   }
 
+  public static triggerGC(){
+    tt?.triggerGC();
+  }
+
   public static getScreenSize(): { width: number, height: number } {
     let systemInfo = this.getSystemInfo();
     return { width: systemInfo.screenWidth, height: systemInfo.screenHeight };

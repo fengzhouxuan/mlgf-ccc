@@ -39,13 +39,17 @@ export class WXApiUtils {
     wx?.vibrateShort({ type: type });
   }
 
+  public static showShareMenu(){
+    wx?.showShareMenu();
+  }
+
+  public static triggerGC(){
+    wx?.triggerGC();
+  }
   public static setFrameRate(rate: number) {
     wx?.setPreferredFramesPerSecond(rate);
   }
 
-  public static showShareMenu(){
-    wx?.showShareMenu();
-  }
   public static getScreenSize():{width:number,height:number} {
       let screenInfo = this.getWindowInfo();
       if(screenInfo) {

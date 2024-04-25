@@ -1,4 +1,4 @@
-import { _decorator, AssetManager, assetManager, Sprite, SpriteFrame, Texture2D } from 'cc';
+import { _decorator, AssetManager, assetManager, ImageAsset, Sprite, SpriteFrame, Texture2D, UITransform } from 'cc';
 import { ImageLoader } from '../ResourceComponent/ImageLoader';
 import { StringUtils } from '../Utils/StringUtils';
 const { ccclass, property } = _decorator;
@@ -48,13 +48,37 @@ export class AutoReleaseSprite extends Sprite {
             });
         });
     }
-
+    private _ttImage = null;
     loadRemote(url: string) {
         if(StringUtils.IsNullOrEmpty(url)){
             return;
         }
         let self = this;
         this._curLoadingUrl = url;
+        if (window["tt"]) {
+            let tt = window["tt"];
+            if (!this._ttImage) {
+                this._ttImage = tt.createImage();
+                this._ttImage.width = this.getComponent(UITransform).contentSize.width;
+                this._ttImage.height = this.getComponent(UITransform).contentSize.height;
+                this._ttImage.addEventListener("load", (res) => {
+                    if (!self || !self.isValid || self._curLoadingUrl != url) {
+                        return;
+                    }
+                    let imageAsset = new ImageAsset(this._ttImage);
+                    let tex = new Texture2D();
+                    let spf = new SpriteFrame();
+                    tex.image = imageAsset;
+                    spf.texture = tex;
+                    self.spriteFrame = spf;
+                });
+                this._ttImage.addEventListener("error", (err) => {
+                    console.log("ttImageErr:", err);
+                });
+            }
+            this._ttImage.src = url;
+            return;
+        }
         ImageLoader.loadRemote(url, ".png", (spriteFrame: SpriteFrame) => {
             if (!this || !this.isValid || self._curLoadingUrl != url) {
                 ImageLoader.release(spriteFrame);

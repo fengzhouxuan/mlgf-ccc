@@ -38,5 +38,6 @@ export class DefaultSystemInfoHelper extends SystemInfoHelper{
         game.frameRate = rate;
     }
     public showShareMenu(){}
+    public triggerGC(){}
 }
 

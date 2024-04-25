@@ -1,10 +1,10 @@
-import { Node, Prefab, instantiate } from "cc";
+import { Asset, Node,assetManager,instantiate } from "cc";
 import { UIGroup } from "./UIGroup";
 import { UIForm } from "./UIForm";
 
 export class UIFormHelper {
     public instantiateUIForm(uiFormAsset: object): object {
-        let prefab = uiFormAsset as Prefab;
+        let prefab = uiFormAsset as Asset;
         prefab.addRef();
         let ins = instantiate(prefab);
         return ins;
@@ -21,8 +21,9 @@ export class UIFormHelper {
     }
 
     public releaseUIForm(uiFormAsset: object, uiFormInstance: object) {
-        let prefab = uiFormAsset as Prefab;
+        let prefab = uiFormAsset as Asset;
         prefab.decRef();
+
         let node: Node = uiFormInstance as Node;
         node?.destroy();
     }

@@ -122,6 +122,10 @@ export class AppComponent extends MlComponent {
     public setFrameRate(rate: number) {
         this._sysHelper?.setFrameRate(rate);
     }
+
+    public triggerGC(){
+        this._sysHelper?.triggerGC();
+    }
 }
 
 export class GetUserInfoOption{

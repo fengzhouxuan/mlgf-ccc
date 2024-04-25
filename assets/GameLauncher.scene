@@ -1524,7 +1524,7 @@
     "_id": "9afW9AQ5NGEYCy+gfDNpCn"
   },
   {
-    "__type__": "4c63ai+yOlCmIXTI6Ii8/45",
+    "__type__": "e1a71fEYgJAnakt3zVL6Fsl",
     "_name": "",
     "_objFlags": 0,
     "node": {
@@ -1532,7 +1532,7 @@
     },
     "_enabled": true,
     "__prefab": null,
-    "_id": "805w+zx6VGo5thDtEDxGSP"
+    "_id": "14aXyj045Mh4KXxZY1W7Ot"
   },
   {
     "__type__": "cc.Node",

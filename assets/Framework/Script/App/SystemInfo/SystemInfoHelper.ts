@@ -31,5 +31,6 @@ export abstract class SystemInfoHelper {
     public abstract vibrateLong();
     public abstract setFrameRate(rate: number);
     public abstract showShareMenu();
+    public abstract triggerGC();
 }
 
