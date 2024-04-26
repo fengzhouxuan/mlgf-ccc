@@ -1,7 +1,7 @@
 import { _decorator, math} from 'cc';
 import { SystemInfoHelper } from './SystemInfoHelper';
 import { WXApiUtils, WxVibrateType } from '../../Env/Wx/WXApiUtils';
-import { LoginInfo } from '../AppComponent';
+import { AppEnvType, LoginInfo } from '../AppComponent';
 const { ccclass } = _decorator;
 
 @ccclass('WxSysInfoHelper')
@@ -58,6 +58,15 @@ export class WxSysInfoHelper extends SystemInfoHelper{
 
     public triggerGC(){
         WXApiUtils.triggerGC();
+    }
+
+    public getEnvType():AppEnvType{
+        let env = WXApiUtils.getEnv();
+        switch(env){
+            case "develop":return AppEnvType.Debug;
+            case "trial":return AppEnvType.Debug;
+            default:return AppEnvType.Release;
+        }
     }
 }
 

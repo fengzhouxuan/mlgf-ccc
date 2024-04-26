@@ -58,6 +58,14 @@ export class TTApiUtils {
   public static getSystemInfo() {
     return tt?.getSystemInfoSync();
   }
+  
+  /**
+   * “production”:正式版, “development”:测试版, "preview":预览版, “gray”:灰度版
+   * @returns 环境
+   */
+  public static getEnv():string{
+    return this.getEnvInfo()?.microapp?.envType;
+  }
   static request(url: string, data: object, method: string, success: Function, fail: Function) {
     tt?.request({
       url: url,
@@ -131,6 +139,10 @@ export class TTApiUtils {
       // 新版本下载失败
     });
 
+  }
+
+  private static getEnvInfo(){
+    return tt?.getEnvInfoSync?.();
   }
 }
 

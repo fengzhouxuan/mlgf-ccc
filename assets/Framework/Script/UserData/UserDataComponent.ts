@@ -2,11 +2,12 @@ import { _decorator } from 'cc';
 import MlComponent from '../Base/MlComponent';
 import { SettingComponent } from '../SettingComponent/SettingComponent';
 import MlEntry from '../Base/MlEntry';
-import { AppComponent, LoginInfo, UserInfo } from '../App/AppComponent';
+import { AppComponent, AppEnvType, LoginInfo, UserInfo } from '../App/AppComponent';
 import { UserDataServerDelegate, UserIdInfo } from './UserDataServerDelegate';
 import { MLConfig } from '../../Config/MLConfig';
 import { TimeLine, TimeLineItem } from '../Base/TimeLine';
 import { StringUtils } from '../Utils/StringUtils';
+import { GameEntry } from '../../../GameMain/Script/Base/GameEntry';
 const { ccclass } = _decorator;
 
 @ccclass('UserDataComponent')
@@ -90,6 +91,12 @@ export class UserDataComponent extends MlComponent {
     }
 
     public initServerData(success?:()=>void) {
+        if(!MLConfig.UserData_RequestSeverDataWhenDebug && GameEntry.app.getAppEnvType() == AppEnvType.Debug){
+            setTimeout(() => {
+                success && success();
+            }, 0);
+            return;
+        }
         this.internalGetServerData((data)=>{
             this.mergeData(data);
             success && success();
@@ -103,7 +110,15 @@ export class UserDataComponent extends MlComponent {
     public saveNow(){
         this._data.gameTimestamp = Date.now();
         this._settingComponent.set(this._settingKey, this._data);
-        this.internalSaveDataToServer();
+        let env= GameEntry.app.getAppEnvType();
+        if(env == AppEnvType.Debug){
+            if(MLConfig.UserData_SaveSeverDataWhenDebug){
+                this.internalSaveDataToServer();    
+            }
+        }else{
+            this.internalSaveDataToServer();
+        }
+        
     }
 
     public setKV(key: string, value: any) {

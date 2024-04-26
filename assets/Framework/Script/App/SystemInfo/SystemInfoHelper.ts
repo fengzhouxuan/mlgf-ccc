@@ -1,5 +1,5 @@
 import { _decorator } from 'cc';
-import { LoginInfo } from '../AppComponent';
+import { AppEnvType, LoginInfo } from '../AppComponent';
 const { ccclass } = _decorator;
 
 @ccclass('SystemInfoHelper')
@@ -32,5 +32,6 @@ export abstract class SystemInfoHelper {
     public abstract setFrameRate(rate: number);
     public abstract showShareMenu();
     public abstract triggerGC();
+    public abstract getEnvType():AppEnvType;
 }
 

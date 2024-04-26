@@ -68,6 +68,14 @@ export class WXApiUtils {
     return wx?.getSystemInfo();
   }
 
+  /**
+   * "develop":开发版 "trial":体验版 "release":正式版
+   * @returns 当前环境 
+   */
+  public static getEnv():string {
+    return this.getAccountInfoSync()?.miniProgram?.envVersion;
+  }
+
   public static request(url: string, method: string, data: any, success?: (res) => void, fail?: (res) => void) {
     wx?.request({
       url: url,
@@ -177,5 +185,9 @@ export class WXApiUtils {
     updateManager.onUpdateFailed(function () {
       // 新版本下载失败
     });    
+  }
+
+  private static getAccountInfoSync(){
+      return wx?.getAccountInfoSync();
   }
 }

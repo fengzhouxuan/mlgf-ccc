@@ -6,6 +6,8 @@ import { GameProcedureInit } from "./GameProcedureInit";
 import { GameProcedureDownLoadPackge } from "./GameProcedureDownLoadPackge";
 import { GameProcedurePreload } from "./GameProcedurePreload";
 import { GameProcedureMainGame } from "./GameProcedureMainGame";
+import { GameProcedureLogin } from "./GameProcedureLogin";
+import { GameProcedureInitUserData } from "./GameProcedureInitUserData";
 
 const { ccclass, property } = _decorator;
 @ccclass("GameProcedureHelper")
@@ -16,6 +18,8 @@ export class GameProcedureHelper extends ProcedureHelper{
     get procedures(): Constructor<ProcedureBase>[] {
         return [
             GameProcedureInit,
+            GameProcedureLogin,
+            GameProcedureInitUserData,
             GameProcedureDownLoadPackge,
             GameProcedurePreload,
             GameProcedureMainGame

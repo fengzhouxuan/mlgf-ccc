@@ -19,7 +19,7 @@ export class UserInfoAuthButton extends Component {
     public auth(success:(userInfo:UserInfo)=>void,fail:()=>void){
         this._success = success;
         this._fail = fail;
-        let needBtn = GameEntry.app.isNeedUserButton();
+        let needBtn = GameEntry.app.isNeedNativeButtonToGetUsrInfo();
         if(needBtn){
             let btnPos = this._btn.getWorldPosition();
             let btnSize = this._btnUITransform.contentSize;
@@ -53,7 +53,7 @@ export class UserInfoAuthButton extends Component {
     }
 
     private onBtnClick(){
-        let needBtn = GameEntry.app.isNeedUserButton();
+        let needBtn = GameEntry.app.isNeedNativeButtonToGetUsrInfo();
         if(!needBtn){
             GameEntry.app.getUserInfo({force:true},(userInfo)=>{
                 this._success && this._success(userInfo)

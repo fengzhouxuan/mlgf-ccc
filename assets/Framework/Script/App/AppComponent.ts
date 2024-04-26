@@ -75,7 +75,7 @@ export class AppComponent extends MlComponent {
         this._event.emit(AppEventType.OnAudioInterruptionEnd);
     }
     //#region  用户信息授权
-    public isNeedUserButton():boolean{
+    public isNeedNativeButtonToGetUsrInfo():boolean{
         return this._userInfoAuthor?.isNeedUserButton();
     }
     public getUserInfo(option:GetUserInfoOption,success:(userInfo:UserInfo)=>void,fail:()=>void) {
@@ -100,6 +100,10 @@ export class AppComponent extends MlComponent {
 
     public getAppScreenSize():{width:number,height:number}{
         return this._sysHelper?.getScreenSize();
+    }
+
+    public getAppEnvType():AppEnvType{
+        return this._sysHelper?.getEnvType();
     }
 
     public login(success:(info:LoginInfo)=>void,fail:()=>void){
@@ -144,5 +148,10 @@ export class UserInfo{
 export class LoginInfo{
     code?:string;           //登录凭证
     anonymousCode?:string;  //匿名码，用于匿名用户登录
+}
+
+export enum AppEnvType{
+    Debug = 1,
+    Release = 2
 }
 

@@ -1,6 +1,6 @@
 import { _decorator, game, view} from 'cc';
 import { SystemInfoHelper } from './SystemInfoHelper';
-import { LoginInfo } from '../AppComponent';
+import { AppEnvType, LoginInfo } from '../AppComponent';
 const { ccclass } = _decorator;
 
 @ccclass('DefaultSystemInfoHelper')
@@ -39,5 +39,8 @@ export class DefaultSystemInfoHelper extends SystemInfoHelper{
     }
     public showShareMenu(){}
     public triggerGC(){}
+    public getEnvType():AppEnvType{
+        return AppEnvType.Debug;
+    }
 }
 
