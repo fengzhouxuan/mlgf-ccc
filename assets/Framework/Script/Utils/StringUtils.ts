@@ -17,6 +17,37 @@ export class StringUtils{
         return `${formattedMinutes}:${formattedSeconds}`;
     }
 
+    public static formatTime(time: number): string {
+        if (time <= 0) {
+            return "00分00秒";
+        }
+    
+        const secondsInMinute = 60;
+        const minutesInHour = 60;
+        const hoursInDay = 24;
+    
+        const seconds = time % secondsInMinute;
+        const minutes = Math.floor((time % (minutesInHour * secondsInMinute))/secondsInMinute);
+        const hours = Math.floor((time % (hoursInDay * minutesInHour*secondsInMinute))/(minutesInHour * secondsInMinute));
+        const days = Math.floor(time / (hoursInDay * minutesInHour * secondsInMinute));
+        
+        let result = '';
+        
+        if(days>0){
+            return `${days}天${hours}时`;
+        }else{
+            if(hours>0){
+                if(minutes<=0){
+                    return `${hours}小时`;
+                }else{
+                    return `${hours}时${minutes}分`;
+                }
+            }else{
+                return `${minutes}分${seconds}秒`;
+            }
+        }
+    }
+
     public static formatNumberToFixed(num: number,dec=1): string {
         if (Number.isInteger(num)) {
             return num.toString();

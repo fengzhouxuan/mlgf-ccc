@@ -7,6 +7,7 @@ import { LoadDataTableSuccessEventArgs } from "../../../Framework/Script/DataTab
 import { DRLevel } from "../DataTable/DRLevel";
 import { AudioManager } from "../../../FrameworkUtil/Audio/AudioManager";
 import { DRLevelLoop } from "../DataTable/DRLevelLoop";
+import { Constructor } from "../../../Framework/Script/Base/MlEntry";
 
 //预加载资源，比如共享资源
 export class GameProcedurePreload extends ProcedureBase {
@@ -14,6 +15,7 @@ export class GameProcedurePreload extends ProcedureBase {
     public onEnter(fsm: Fsm<ProcedureComponent>): void {
         GameEntry.event.on(LoadDataTableSuccessEventArgs.EventId, this.LoadDataSuccess, this);
         this.loadDataTables();
+        this.loadConfig();
         AudioManager.downloadRes();
     }
     public onUpdate(fsm: Fsm<ProcedureComponent>, dt: number): void {
@@ -29,12 +31,17 @@ export class GameProcedurePreload extends ProcedureBase {
     }
 
     private loadDataTables() {
-        GameEntry.dataTable.loadDataTableWithMergedJsons(
-        "Share","Config/GameDatatables"
-        ,["Level","LevelLoop"]
-        ,[DRLevel,DRLevelLoop]);
-        this._loadFlag++;
+        this.loadDataTable("Level",DRLevel);
+    }
+
+    private loadConfig(){
         GameEntry.dataTable.loadConfig("Share","Config/MainConfig");
+        this._loadFlag++;
+    }
+
+    private loadDataTable<T>(name:string,ctor: Constructor<T>){
+        let path = `DataTable/${name}`;
+        GameEntry.dataTable.loadDataTable("Share",path,ctor);
         this._loadFlag++;
     }
     

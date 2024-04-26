@@ -1,0 +1,17 @@
+[
+		{
+			"id": 0,
+			"bundle":"Level1",
+			"levelConfig":"Level1"
+		},
+		{
+			"id": 1,
+			"bundle":"Level2",
+			"levelConfig":"Level2"
+		},
+		{
+			"id": 2,
+			"bundle":"Level3",
+			"levelConfig":"Level3"
+		}
+]

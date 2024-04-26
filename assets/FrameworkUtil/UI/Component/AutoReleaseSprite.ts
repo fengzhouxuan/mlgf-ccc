@@ -1,6 +1,6 @@
 import { _decorator, AssetManager, assetManager, ImageAsset, Sprite, SpriteFrame, Texture2D, UITransform } from 'cc';
-import { ImageLoader } from '../ResourceComponent/ImageLoader';
-import { StringUtils } from '../Utils/StringUtils';
+import { ImageLoader } from '../../../Framework/Script/ResourceComponent/ImageLoader';
+import { StringUtils } from '../../../Framework/Script/Utils/StringUtils';
 const { ccclass, property } = _decorator;
 
 @ccclass('AutoReleaseSprite')

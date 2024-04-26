@@ -27,18 +27,6 @@ import { HttpComponent } from '../../../Framework/Script/Http/HttpComponent';
 import { AppComponent } from '../../../Framework/Script/App/AppComponent';
 import { UserDataComponent } from '../../../Framework/Script/UserData/UserDataComponent';
 const { ccclass, property } = _decorator;
-var timeScale = 1;
-
-//@ts-ignore
-game._calculateDT = function (now: number) {
-    if (!now) now = performance.now();
-    this._deltaTime = now > this._startTime ? (now - this._startTime) / 1000 : 0;
-    if (this._deltaTime > Game.DEBUG_DT_THRESHOLD) {
-        this._deltaTime = this.frameTime / 1000;
-    }
-    this._startTime = now;
-    return this._deltaTime * timeScale;
-};
 
 @ccclass('GameEntry')
 export class GameEntry extends Component {
@@ -67,13 +55,6 @@ export class GameEntry extends Component {
     public static dataAnalysis:DataAnalysisComponent;
 
     public static game: GameMain;
-
-    public static set gameSpeed(v: number) {
-        timeScale = v;
-    }
-    public static get gameSpeed(): number {
-        return timeScale;
-    }
 
     //自定义管理器
     start() {
