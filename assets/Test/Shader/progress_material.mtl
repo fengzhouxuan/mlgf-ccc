@@ -9,9 +9,7 @@
   },
   "_techIdx": 0,
   "_defines": [
-    {
-      "USE_INSTANCING": true
-    }
+    {}
   ],
   "_states": [
     {
@@ -32,12 +30,12 @@
       },
       "progressColor": {
         "__type__": "cc.Color",
-        "r": 105,
-        "g": 92,
-        "b": 255,
+        "r": 255,
+        "g": 179,
+        "b": 136,
         "a": 255
       },
-      "progress": 0.4
+      "progress": 0.6
     }
   ]
 }
