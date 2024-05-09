@@ -63,7 +63,7 @@ export class EventComponent extends MlComponent {
             return;
         }
         let handlers = this.getEventHandlers(args.eventId);
-        for (let index = 0; index < handlers.length; index++) {
+        for (let index = handlers.length-1; index >=0; index--) {
             let handler = handlers[index];
             handler.listener.call(handler.context,sender,args);
         }
