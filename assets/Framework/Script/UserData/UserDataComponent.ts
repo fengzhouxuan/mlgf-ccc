@@ -46,14 +46,14 @@ export class UserDataComponent extends MlComponent {
     }
 
     private updateSaveDirty(dt:number){
-        this._saveDelayIntervalAdd+=dt;
-        if(this._saveDelayIntervalAdd<MLConfig.UserData_SaveDelay){
-            return;
-        }
-        this._saveDelayIntervalAdd=0;
         if(this._saveDirty){
-            this._autoSaveIntervalAdd=0;
+            this._saveDelayIntervalAdd+=dt;
+            if(this._saveDelayIntervalAdd<MLConfig.UserData_SaveDelay){
+                return;
+            }
             this.saveNow();
+            this._saveDelayIntervalAdd=0;
+            this._autoSaveIntervalAdd=0;
             this._saveDirty=false;
         }
     }
@@ -104,6 +104,7 @@ export class UserDataComponent extends MlComponent {
     }
 
     public save(){
+        this._saveDelayIntervalAdd=0;
         this._saveDirty=true;
     }
 
