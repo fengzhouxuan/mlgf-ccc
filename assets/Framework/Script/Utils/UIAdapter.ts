@@ -40,7 +40,7 @@ export class UIAdapter extends Component {
             }else
             if(this.adapterBottom){
                 if(widget){
-                    widget.top += this.bottomOffset;
+                    widget.bottom += this.bottomOffset;
                 }else{
                     pos.y = pos.y + this.bottomOffset;
                     this.node.setWorldPosition(pos);
