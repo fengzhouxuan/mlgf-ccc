@@ -154,7 +154,7 @@ export class WXApiUtils {
       success (res) {
         if (res.code) {
           //发起网络请求
-          success && success(res);
+          success && success(res.code);
       }
     },
     fail(){
