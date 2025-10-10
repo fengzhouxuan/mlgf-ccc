@@ -31,7 +31,7 @@ export class EntityComponent extends MlComponent {
     
     private _entityInfos: Map<number, EntityInfo> = new Map<number, EntityInfo>;
     private _entityGroups: Map<string, EntityGroup> = new Map<string, EntityGroup>;
-    private _entitiesBeingLoaded: Map<number, number> = new Map<number, number>;
+    private _entitiesLoading: Map<number, number> = new Map<number, number>;
     private _entitiesToReleaseOnLoad: Set<number> = new Set<number>;
     private _recycleQueue: EntityInfo[] = [];
     private _resourceComponent: ResourceComponent = null;
@@ -167,14 +167,14 @@ export class EntityComponent extends MlComponent {
     }
     public getAllLoadingEntityIds(): number[] {
         let results: number[] = [];
-        for (const [key, value] of this._entitiesBeingLoaded) {
+        for (const [key, value] of this._entitiesLoading) {
             results.push(key);
         }
         return results;
     }
 
     public IsEntityInLoading(entityId: number): boolean {
-        return this._entitiesBeingLoaded.has(entityId);
+        return this._entitiesLoading.has(entityId);
     }
 
     public IsEntityValid(entity: Entity): boolean {
@@ -222,7 +222,7 @@ export class EntityComponent extends MlComponent {
         let entityInstanceObject = entityGroup.spawnEntityInstanceObject(assetName);
         if (entityInstanceObject == null) {
             let serialId = ++this._serId;
-            this._entitiesBeingLoaded.set(entityId, serialId);
+            this._entitiesLoading.set(entityId, serialId);
             let loadEntityInfo = this._loadEntityInfoReferencePool.acquire(LoadEntityInfo).initialize(serialId, entityId, assetName, entityGroup, showEntityInfo);
             this._resourceComponent.LoadResInBundle(bundleName, assetName, Prefab, null, this.loadAssetProgressCallback.bind(this), this.loadAssetCompleteCallback.bind(this), loadEntityInfo);
         } else {
@@ -232,8 +232,8 @@ export class EntityComponent extends MlComponent {
 
     public hideEntity(entityId: number, userData?: object) {
         if (this.IsEntityInLoading(entityId)) {
-            this._entitiesToReleaseOnLoad.add(this._entitiesBeingLoaded.get(entityId));
-            this._entitiesBeingLoaded.delete(entityId);
+            this._entitiesToReleaseOnLoad.add(this._entitiesLoading.get(entityId));
+            this._entitiesLoading.delete(entityId);
             return;
         }
 
@@ -253,10 +253,10 @@ export class EntityComponent extends MlComponent {
     }
 
     public hideAllLoadingEntities(){
-        for (const [key, value] of this._entitiesBeingLoaded) {
+        for (const [key, value] of this._entitiesLoading) {
             this._entitiesToReleaseOnLoad.add(value);
         }
-        this._entitiesBeingLoaded.clear();
+        this._entitiesLoading.clear();
     }
 
     public getParentEntity(childEntityId:number):Entity{
@@ -392,7 +392,7 @@ export class EntityComponent extends MlComponent {
                 this._entitiesToReleaseOnLoad.delete(loadEntityInfo.serialId);
                 return;
             }
-            this._entitiesBeingLoaded.delete(loadEntityInfo.entityId);
+            this._entitiesLoading.delete(loadEntityInfo.entityId);
             // console.warn(`实体加载失败 ${err.message}`);
             return;
         }
@@ -405,7 +405,7 @@ export class EntityComponent extends MlComponent {
             // this._entityHelper.releaseEntity(entityAsset, null);
             return;
         }
-        this._entitiesBeingLoaded.delete(loadEntityInfo.entityId);
+        this._entitiesLoading.delete(loadEntityInfo.entityId);
         //实例化实体
         let entityAssetName = loadEntityInfo.entityAssetName;
         let entityInstanceObject = this._entityInstanceObjectReferencePool.acquire(EntityInstanceObject).initialize(entityAssetName, entityAsset, this._entityHelper.instantiateEntity(entityAsset), this._entityHelper);

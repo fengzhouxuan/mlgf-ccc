@@ -24,7 +24,7 @@ const { ccclass, property } = _decorator;
 export class UIComponent extends MlComponent {
     private _uiGroups: Map<string, UIGroup> = new Map<string, UIGroup>;
     private _uiFormsLoading: Map<number, string> = new Map<number, string>;
-    private _uiFormsCancelLoading: Set<number> = new Set<number>;
+    private _uiFormsCancelLoading: Set<number> = new Set<number>;   
     private _recycleQueue: UIForm[] = [];
     private _curShowingPopForm: LoadUIPopFormInfo = null;
     private _popFormShowQueue: LoadUIPopFormInfo[] = [];

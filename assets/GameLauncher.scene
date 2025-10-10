@@ -19,12 +19,15 @@
     "_children": [
       {
         "__id__": 2
+      },
+      {
+        "__id__": 79
       }
     ],
     "_active": true,
     "_components": [],
     "_prefab": {
-      "__id__": 79
+      "__id__": 80
     },
     "_lpos": {
       "__type__": "cc.Vec3",
@@ -55,7 +58,7 @@
     },
     "autoReleaseAssets": false,
     "_globals": {
-      "__id__": 80
+      "__id__": 81
     },
     "_id": "40397e1a-b543-4771-903d-a6e84a833dd6"
   },
@@ -628,7 +631,7 @@
     "_priority": 1073741824,
     "_fov": 45,
     "_fovAxis": 0,
-    "_orthoHeight": 666.9999999999999,
+    "_orthoHeight": 667,
     "_near": 1,
     "_far": 2000,
     "_color": {
@@ -2360,6 +2363,46 @@
     "_id": "cbWdeuWoJMl4i+UXKLxqi5"
   },
   {
+    "__type__": "cc.Node",
+    "_name": "Node",
+    "_objFlags": 0,
+    "_parent": {
+      "__id__": 1
+    },
+    "_children": [],
+    "_active": true,
+    "_components": [],
+    "_prefab": null,
+    "_lpos": {
+      "__type__": "cc.Vec3",
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "_lrot": {
+      "__type__": "cc.Quat",
+      "x": 0,
+      "y": 0,
+      "z": 0,
+      "w": 1
+    },
+    "_lscale": {
+      "__type__": "cc.Vec3",
+      "x": 1,
+      "y": 1,
+      "z": 1
+    },
+    "_mobility": 0,
+    "_layer": 1073741824,
+    "_euler": {
+      "__type__": "cc.Vec3",
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "_id": "f4h3SdIohPx6UuzpdzhV7P"
+  },
+  {
     "__type__": "cc.PrefabInfo",
     "root": null,
     "asset": null,
@@ -2370,22 +2413,22 @@
   {
     "__type__": "cc.SceneGlobals",
     "ambient": {
-      "__id__": 81
-    },
-    "shadows": {
       "__id__": 82
     },
-    "_skybox": {
+    "shadows": {
       "__id__": 83
     },
-    "fog": {
+    "_skybox": {
       "__id__": 84
     },
-    "octree": {
+    "fog": {
       "__id__": 85
     },
-    "lightProbeInfo": {
+    "octree": {
       "__id__": 86
+    },
+    "lightProbeInfo": {
+      "__id__": 87
     },
     "bakedWithStationaryMainLight": false,
     "bakedWithHighpLightmap": false

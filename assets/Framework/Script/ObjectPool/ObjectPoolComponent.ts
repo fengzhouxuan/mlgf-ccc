@@ -26,7 +26,7 @@ export class ObjectPoolComponent extends MlComponent {
     }
 
     public getObjectPool(name: string): ObjectPoolBase{
-        if(this.hasObjectPool(name)){
+        if(!this.hasObjectPool(name)){
             return null;
         }
         return this._objectPools.get(name);
